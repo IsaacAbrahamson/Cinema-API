@@ -24,7 +24,7 @@ const Movie = db.define('Movie', {
   },
   trailer: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   backdrop: {
     type: DataTypes.STRING,

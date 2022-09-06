@@ -3,10 +3,13 @@
 import db from './connectDB.js'
 import Showing from '../models/Showing.js'
 import Movie from '../models/Movie.js'
+import Ticket from '../models/Ticket.js'
 import { getShowings, getFavorites } from './tmdb.js'
-import { createTimes } from '../utils/showingsAlgorithm.js'
+import { createTimes, createSeats } from '../utils/showingsAlgorithm.js'
 
 const transaction = await db.transaction()
+const startTime = new Date()
+console.log('Starting database update...')
 
 try {
   // Drop current tables
@@ -20,21 +23,26 @@ try {
   await createMovies(showings, false, transaction)
   await createMovies(favorites, true, transaction)
 
-  // Add showings table to database
+  // Add showings table to database for 7 days
   const times = createTimes(favorites, showings, 7)
   for (let i = 0; i < times.length; i++) {
     await createShowings(times[i])
   }
 
-  // Add tickets table to database
-
   // Create foriegn keys
   await createAssociations()
 
   await transaction.commit()
+  await db.close()
+
+  const endTime = new Date()
+  const duration = ((endTime.getTime() - startTime.getTime()) / 1000 / 60).toFixed(2)
+  console.log(`Database update complete! Total run time: ${duration} minutes.`)
 } catch (err) {
   console.log(err)
   await transaction.rollback()
+  console.log(`Database operation encountered an error. All changes have been rolled back.`)
+  await db.close()
 }
 
 async function createAssociations() {
@@ -51,6 +59,7 @@ async function createAssociations() {
   }
 }
 
+
 function createShowings(times) {
   return Promise.all(times.map(result => {
     return new Promise(async (resolve, reject) => {
@@ -61,6 +70,17 @@ function createShowings(times) {
           room: result.name,
           apiID: result.apiID,
         }, { lock: true, transaction })
+
+        const seats = createSeats()
+        for (let seat of seats) {
+          const ticket = await Ticket.create({
+            seat_row: seat[0],
+            seat_col: seat[1],
+            available: true,
+          }, { lock: true, transaction })
+          showing.addTicket(ticket)
+        }
+
         resolve(showing)
       } catch (err) {
         reject(err)

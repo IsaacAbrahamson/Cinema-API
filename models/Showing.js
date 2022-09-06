@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
 import db from '../utils/connectDB.js'
+import Ticket from './Ticket.js'
 
 const Showing = db.define('showing', {
   time: {
@@ -15,5 +16,8 @@ const Showing = db.define('showing', {
     allowNull: false
   },
 })
+
+Showing.hasMany(Ticket)
+Ticket.belongsTo(Showing)
 
 export default Showing

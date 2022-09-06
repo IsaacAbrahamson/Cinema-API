@@ -70,5 +70,10 @@ export async function getTrailer(id) {
 
   // Reverse array so first trailer is used
   const trailers = data.results.filter(video => video.type = 'Trailer').reverse()
-  return 'https://www.youtube.com/watch?v=' + trailers[0].key
+
+  if (trailers[0]) {
+    return 'https://www.youtube.com/watch?v=' + trailers[0].key
+  } else {
+    return null
+  }
 }

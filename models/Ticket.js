@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import db from '../utils/connectDB.js'
 
-const Movie = db.define('Movie', {
+const Ticket = db.define('Ticket', {
   email: {
     type: DataTypes.STRING,
     allowNull: true
@@ -10,11 +10,11 @@ const Movie = db.define('Movie', {
     type: DataTypes.STRING,
     allowNull: true
   },
-  seat_col: {
-    type: DataTypes.INTEGER,
+  seat_row: {
+    type: DataTypes.CHAR,
     allowNull: false
   },
-  seat_row: {
+  seat_col: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
