@@ -6,7 +6,7 @@ const Movie = db.define('Movie', {
     type: DataTypes.BOOLEAN
   },
   apiID: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   title: {
@@ -14,7 +14,7 @@ const Movie = db.define('Movie', {
     allowNull: false
   },
   overview: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT('long'),
     allowNull: false
   },
   release: {

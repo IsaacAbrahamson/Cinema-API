@@ -11,11 +11,11 @@ const Movie = db.define('Movie', {
     allowNull: false
   },
   seat_col: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   seat_row: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 })

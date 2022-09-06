@@ -1,4 +1,4 @@
-// Functions to interact with The Movie Database API
+// Helper functions to call The Movie Database API
 // https://developers.themoviedb.org/3
 
 import * as dotenv from 'dotenv'
@@ -32,7 +32,7 @@ export async function getShowings() {
     video.poster = 'https://image.tmdb.org/t/p/original/' + video.poster_path
   }
 
-  res.json(data.results)
+  return data.results
 }
 
 
@@ -60,7 +60,7 @@ export async function getFavorites() {
     video.poster = 'https://image.tmdb.org/t/p/original/' + video.poster_path
   }
 
-  res.json(data.results)
+  return data.results
 }
 
 
