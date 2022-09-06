@@ -1,8 +1,9 @@
 import express from 'express'
-import { getShowings, getFavorites } from '../Controllers/movieController.js'
+import { findAll, findFavorites, findShowings } from '../Controllers/movieController.js'
 const router = express.Router()
 
-router.get('/showings', getShowings)
-router.get('/favorites', getFavorites)
+router.get('/all', findAll)
+router.get('/favorites', findFavorites)
+router.get('/showings', findShowings)
 
 export default router

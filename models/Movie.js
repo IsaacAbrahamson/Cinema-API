@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
-import db from '../utils/database.js'
+import db from '../utils/connectDB.js'
+import Showing from './Showing.js'
 
 const Movie = db.define('Movie', {
   favorite: {
@@ -34,5 +35,8 @@ const Movie = db.define('Movie', {
     allowNull: false
   }
 })
+
+Movie.hasMany(Showing)
+Showing.belongsTo(Movie)
 
 export default Movie

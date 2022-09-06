@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server"
+    "start": "nodemon server",
+    "update": "node ./utils/updateDB.js > ./logs/output.txt"
   },
   "dependencies": {
     "dotenv": "^16.0.2",
@@ -12,5 +13,8 @@
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.10",
     "sequelize": "^6.21.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
