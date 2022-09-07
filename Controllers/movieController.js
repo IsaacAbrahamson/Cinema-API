@@ -1,24 +1,55 @@
 import Movie from '../models/Movie.js'
+import Showing from '../models/Showing.js'
 
+// Example: /api/movie/all
 export async function findAll(req, res) {
-  const movies = await Movie.findAll()
-  res.json(movies)
+  try {
+    const movies = await Movie.findAll({ include: Showing })
+    res.json(movies)
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
 }
 
+// Example: /api/movie/favorites?date=2022-09-06
 export async function findFavorites(req, res) {
-  const movies = await Movie.findAll({
-    where: {
-      favorite: true
-    }
-  })
-  res.json(movies)
+  try {
+    const movies = await Movie.findAll({
+      where: {
+        favorite: true
+      },
+      include: {
+        model: Showing,
+        where: {
+          date: req.query.date
+        }
+      }
+    })
+    res.json(movies)
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
 }
 
+// Example: /api/movie/showings?date=2022-09-06
 export async function findShowings(req, res) {
-  const movies = await Movie.findAll({
-    where: {
-      favorite: false
-    }
-  })
-  res.json(movies)
+  try {
+    const movies = await Movie.findAll({
+      where: {
+        favorite: false
+      },
+      include: {
+        model: Showing,
+        where: {
+          date: req.query.date
+        }
+      }
+    })
+    res.json(movies)
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
 }

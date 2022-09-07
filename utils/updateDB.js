@@ -66,6 +66,7 @@ function createShowings(times) {
 
       try {
         const showing = await Showing.create({
+          date: result.time.slice(0, 10),
           time: result.time,
           room: result.name,
           apiID: result.apiID,

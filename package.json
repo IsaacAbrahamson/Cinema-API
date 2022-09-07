@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "start": "nodemon server",
-    "update": "node ./utils/updateDB.js > ./logs/output.txt"
+    "update": "node ./utils/updateDB.js"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
