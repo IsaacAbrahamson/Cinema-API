@@ -45,3 +45,14 @@ Those seats will be updated when a user buys them
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 ```
+
+## Calling API
+
+### movie endpoint
+GET `/api/movie/all`
+GET `/api/movie/favorites?date=2022-09-06`
+GET `/api/movie/showings?date=2022-09-06`
+
+### ticket endpoint
+GET `/api/ticket/all?showingId=1`
+GET `/api/ticket/buy?id=1&email=test@email.com&name=Test Name`
