@@ -2,10 +2,11 @@ import HeaderSlide from "./HeaderSlide"
 
 // Swiper Components and Styles
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
 
 interface Props {
   movies: { id: number, title: string, overview: string, backdrop: string }[]
@@ -31,16 +32,17 @@ function Header(props: Props) {
   return (
     <header>
       <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={50}
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={0}
         slidesPerView={1}
         navigation
         loop={true}
+        autoplay={{ delay: 8000 }}
         pagination={{ clickable: true }}
       >
         {slideElems}
       </Swiper>
-    </header>
+    </header >
   )
 }
 

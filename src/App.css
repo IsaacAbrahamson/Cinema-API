@@ -1,0 +1,185 @@
+/*=============================================
+=        CSS RESET                            =
+=============================================*/
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/*=============================================
+=        Colors                               =
+=============================================*/
+
+:root {
+  --black: #111111;
+  --orange: #FF7D1F;
+  --black-gray: #171717;
+  --transparent-white: rgba(255, 255, 255, 0.7);
+  --swiper-theme-color: var(--transparent-white);
+}
+
+body {
+  background-color: var(--black-gray);
+}
+
+
+
+/*=============================================
+=        Fonts                                =
+=============================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300,400,700,900&display=swap');
+
+
+
+/*=============================================
+=        Navigation                           =
+=============================================*/
+
+nav {
+  background: var(--black);
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 999999;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+nav img.logo {
+  display: block;
+  height: 50%;
+}
+
+nav .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+nav .nav-links .nav--link {
+  color: var(--transparent-white);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+nav svg.nav--icon {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+nav svg.nav--icon path {
+  fill: var(--orange) !important;
+}
+
+
+
+/*=============================================
+=        Header                               =
+=============================================*/
+
+header {
+  height: 80vh;
+  margin-top: 10vh;
+}
+
+header .swiper {
+  height: 100%;
+}
+
+header .header-slide {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+header .header-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: var(--black);
+  background: linear-gradient(90deg, rgba(17, 17, 17, 0.9) 0%, rgba(17, 17, 17, 0.7) 70%, rgba(17, 17, 17, 0.4) 100%);
+  z-index: 10;
+}
+
+header .header-text {
+  position: relative;
+  z-index: 20;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  width: 35%;
+  margin-left: 15%;
+}
+
+header .header-text .header--subtitle {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--orange);
+  margin-left: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+header .header-text .header--title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  letter-spacing: -2px;
+  line-height: 90%;
+}
+
+header .header-text .header--desc {
+  margin-top: 20px;
+  margin-left: 5px;
+  font-size: 20px;
+  line-height: 150%;
+  color: var(--transparent-white);
+}
