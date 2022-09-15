@@ -4,19 +4,23 @@ import ShowingSelector from './ShowingSelector'
 
 function Showings() {
   let todayDate: Date = new Date()
-  const todayStr: String = `${todayDate.getFullYear()}-${padDate(todayDate.getMonth() + 1)}-${padDate(todayDate.getDate())}`
+  const todayStr: string = `${todayDate.getFullYear()}-${padDate(todayDate.getMonth() + 1)}-${padDate(todayDate.getDate())}`
 
   const [showings, setShowings] = useState<any[]>([])
   const [chosenDate, setChosenDate] = useState(todayStr)
 
   useEffect(() => {
     fetchShowings()
-  }, [])
+  }, [chosenDate])
 
   async function fetchShowings() {
     const res = await fetch(`/api/movie/showings?date=${chosenDate}`)
     const data = await res.json()
     setShowings(data)
+  }
+
+  function updateDate(date: string) {
+    setChosenDate(date)
   }
 
   // Add leading 0 to date if needed
@@ -38,6 +42,7 @@ function Showings() {
           poster={showings[i].poster}
           backdrop={showings[i].backdrop}
           showings={showings[i].showings}
+          date={chosenDate}
         />
       )
     }
@@ -45,7 +50,7 @@ function Showings() {
 
   return (
     <main className='showings'>
-      <ShowingSelector />
+      <ShowingSelector date={chosenDate} updateDate={updateDate} />
       {showingItems}
     </main>
   )

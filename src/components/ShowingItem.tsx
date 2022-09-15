@@ -5,6 +5,7 @@ interface Props {
   poster: string,
   backdrop: string,
   showings: { id: number, time: string }[],
+  date: string
 }
 
 function ShowingItem(props: Props) {
@@ -18,7 +19,7 @@ function ShowingItem(props: Props) {
       <div className="showing-item-text">
         <h3 className="showing-item--title">{props.title}</h3>
         <p className="showing-item--desc">{props.desc}</p>
-        <h4 className="showing-item--header">Showings:</h4>
+        <h4 className="showing-item--header">Showings ({props.date}):</h4>
         <div className="showing-item-showtimes">
           {props.showings.map(e => {
             return (
