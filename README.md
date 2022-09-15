@@ -55,4 +55,24 @@ GET `/api/movie/showings?date=2022-09-06`
 
 ### ticket endpoint
 GET `/api/ticket/all?showingId=1`
-GET `/api/ticket/buy?id=1&email=test@email.com&name=Test Name`
+POST `/api/ticket/buy` with JSON body of { id, email, name }
+```javascript
+fetch('/api/ticket/buy', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    id: 4673,
+    email: "john.doe@test.com",
+    name: "John Doe"
+  }),
+}
+```
+
+## Updating Database
+
+Run the ./utils/updateDB.js file or just do the following script:
+```
+npm run update
+```

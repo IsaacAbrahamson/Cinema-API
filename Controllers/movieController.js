@@ -1,6 +1,12 @@
 import Movie from '../models/Movie.js'
 import Showing from '../models/Showing.js'
 
+// Example: /api/search?apiID=123&date=2022-01-01
+// Find info about a movie and get its showtimes for a day
+export async function search() {
+
+}
+
 // Example: /api/movie/all
 export async function findAll(req, res) {
   try {

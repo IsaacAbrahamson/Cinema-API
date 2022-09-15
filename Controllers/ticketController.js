@@ -19,18 +19,22 @@ export async function findTickets(req, res) {
 
 // Example: /api/ticket/buy?id=1&email=test@email.com&name=Test
 export async function buyTicket(req, res) {
-  // TODO: throw error if unavailable
-  // TODO: use POST not GET
-  // TODO: time in EST
   try {
     // Find and update ticket
     const ticket = await Ticket.findOne({
       where: {
-        id: req.query.id
+        id: req.body.id
       }
     })
-    ticket.email = req.query.email
-    ticket.name = req.query.name
+
+    // Ensure ticket is available
+    if (!ticket.available) {
+      res.json({ err: 'Selected ticket is unavailable' })
+      return
+    }
+
+    ticket.email = req.body.email
+    ticket.name = req.body.name
     ticket.available = false
     await ticket.save()
 
@@ -50,8 +54,9 @@ export async function buyTicket(req, res) {
 
     res.json({
       movie: movie.title,
+      apiID: movie.apiID,
       room: showing.room,
-      time: new Date(showing.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      time: showing.time,
       seat: ticket.seat_row + ticket.seat_col,
       name: ticket.name,
       id: ticket.id,

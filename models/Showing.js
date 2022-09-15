@@ -8,7 +8,7 @@ const Showing = db.define('showing', {
     allowNull: false
   },
   time: {
-    type: 'TIMESTAMP',
+    type: DataTypes.STRING,
     allowNull: false
   },
   room: {
