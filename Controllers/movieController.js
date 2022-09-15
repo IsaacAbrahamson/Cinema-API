@@ -1,10 +1,20 @@
 import Movie from '../models/Movie.js'
 import Showing from '../models/Showing.js'
 
-// Example: /api/search?apiID=123&date=2022-01-01
-// Find info about a movie and get its showtimes for a day
-export async function search() {
-
+// Example: /api/search?id=1
+export async function search(req, res) {
+  try {
+    const movies = await Movie.findAll({
+      where: {
+        id: req.query.id
+      },
+      include: Showing
+    })
+    res.json(movies)
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
 }
 
 // Example: /api/movie/all
