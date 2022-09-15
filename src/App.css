@@ -97,6 +97,7 @@ nav .nav-links .nav--link {
   align-items: center;
   transition: all 200ms;
   position: relative;
+  text-decoration: none;
 }
 
 nav svg.nav--icon {
@@ -189,4 +190,18 @@ footer .footer--desc {
 
 footer a.footer--link {
   color: var(--orange)
+}
+
+
+
+/*=============================================
+=        Cart                                 =
+=============================================*/
+.cart {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  padding-top: 50px;
 }
