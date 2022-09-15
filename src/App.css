@@ -215,3 +215,72 @@ header .header-text .header--ticketBtn:hover {
 /*=============================================
 =        Showings                             =
 =============================================*/
+.showings {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.showing-selector {
+  color: white;
+  margin-top: 50px;
+}
+
+.showing-item {
+  border-bottom: 1px solid rgba(161, 161, 161, 0.3);
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.showing-item-poster {
+  width: 30%;
+  margin-bottom: 50px;
+}
+
+.showing-item-text {
+  width: 70%;
+  margin-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 15%;
+  color: white;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+
+.showing-item--title {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 90%;
+  text-transform: uppercase;
+}
+
+.showing-item--desc {
+  font-size: 18px;
+  color: var(--transparent-white);
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.showing-item--header {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.showing-item-showtimes {
+  margin-top: 10px;
+}
+
+.showing-item-showtimes .showtime {
+  color: var(--orange);
+  display: inline-block;
+  border: 1px solid var(--orange);
+  padding: 4px 8px;
+  margin-right: 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}

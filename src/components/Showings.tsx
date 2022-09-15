@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ShowingItem from './ShowingItem'
+import ShowingSelector from './ShowingSelector'
 
 function Showings() {
   let todayDate: Date = new Date()
@@ -23,9 +24,10 @@ function Showings() {
     return ('0' + date).slice(-2)
   }
 
-  const showingElems = showings.map(e => {
+  const showingItems = showings.map(e => {
     return (
       <ShowingItem
+        key={e.id}
         id={e.id}
         title={e.title}
         desc={e.overview}
@@ -37,9 +39,10 @@ function Showings() {
   })
 
   return (
-    <div>
-      {showingElems}
-    </div>
+    <main className='showings'>
+      <ShowingSelector />
+      {showingItems}
+    </main>
   )
 }
 
