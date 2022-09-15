@@ -28,8 +28,8 @@ export async function getShowings() {
 
   for (let video of data.results) {
     video.trailer = await getTrailer(video.id)
-    video.backdrop = 'https://image.tmdb.org/t/p/original/' + video.backdrop_path
-    video.poster = 'https://image.tmdb.org/t/p/original/' + video.poster_path
+    video.backdrop = 'https://image.tmdb.org/t/p/original' + video.backdrop_path
+    video.poster = 'https://image.tmdb.org/t/p/w500' + video.poster_path
   }
 
   return data.results
