@@ -60,14 +60,6 @@ body {
 
 
 /*=============================================
-=        Fonts                                =
-=============================================*/
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300,400,700,900&display=swap');
-
-
-
-/*=============================================
 =        Navigation                           =
 =============================================*/
 
@@ -129,12 +121,22 @@ nav .nav--link:hover path {
 
 
 /*=============================================
+=        Navigation                           =
+=============================================*/
+
+#page {
+  min-height: 50vh;
+  margin-top: 10vh;
+}
+
+
+
+/*=============================================
 =        Header                               =
 =============================================*/
 
 header {
   height: 80vh;
-  margin-top: 10vh;
 }
 
 header .swiper {
@@ -199,7 +201,7 @@ header .header-text .header--desc {
   color: var(--transparent-white);
 }
 
-header .header-text .header--ticketBtn {
+header .header-text a.header--ticketBtn {
   background-color: var(--orange);
   display: inline-block;
   text-transform: uppercase;
@@ -211,6 +213,8 @@ header .header-text .header--ticketBtn {
   cursor: pointer;
   border-radius: 50px;
   transition: all 200ms;
+  color: white;
+  text-decoration: none;
 }
 
 header .header-text .header--ticketBtn:hover {
@@ -268,6 +272,7 @@ header .header-text .header--ticketBtn:hover {
 
 .showing-item-poster {
   width: 30%;
+  max-width: 500px;
   margin-bottom: 50px;
 }
 
@@ -317,6 +322,7 @@ header .header-text .header--ticketBtn:hover {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 200ms;
+  text-decoration: none;
 }
 
 .showing-item-showtimes .showtime:hover {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
 
 interface Props {
+  id: number,
   title: String,
   desc: String,
   backdrop: String,
@@ -27,7 +29,7 @@ function HeaderSlide(props: Props) {
         <p className="header--subtitle">now showing</p>
         <p className="header--title">{props.title}</p>
         <p className="header--desc">{props.desc}</p>
-        <div className='header--ticketBtn'>Get Tickets</div>
+        <Link to={`showing/${props.id}`} className='header--ticketBtn'>Get Tickets</Link>
       </div>
     </div>
   )

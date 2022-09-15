@@ -21,6 +21,7 @@ function Header(props: Props) {
       <SwiperSlide key={props.movies[i].id}>
         <HeaderSlide
           key={props.movies[i].id}
+          id={props.movies[i].id}
           title={props.movies[i].title}
           desc={props.movies[i].overview}
           backdrop={props.movies[i].backdrop}

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 interface Props {
   id: number,
   title: string,
@@ -23,7 +25,7 @@ function ShowingItem(props: Props) {
         <div className="showing-item-showtimes">
           {props.showings.map(e => {
             return (
-              <div className="showtime" key={e.id}>{e.time.slice(11)}</div>
+              <Link to={`showing/${e.id}`} className="showtime" key={e.id}>{e.time.slice(11)}</Link>
             )
           })}
         </div>
