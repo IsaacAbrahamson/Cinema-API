@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Header from './home/Header'
 import Showings from './home/Showings'
+import './home/HomeStyles.css'
 
 function Home() {
   const [movies, setMovies] = useState([])

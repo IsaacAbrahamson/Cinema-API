@@ -6,6 +6,7 @@ interface Props {
   title: String,
   desc: String,
   backdrop: String,
+  showingID: number,
 }
 
 function HeaderSlide(props: Props) {

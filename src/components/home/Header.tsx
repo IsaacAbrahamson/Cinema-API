@@ -9,10 +9,17 @@ import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
 interface Props {
-  movies: { id: number, title: string, overview: string, backdrop: string }[]
+  movies: {
+    id: number,
+    title: string,
+    overview: string,
+    backdrop: string,
+    showings: any
+  }[]
 }
 
 function Header(props: Props) {
+  console.log(props)
   // Only render five movies in header
   const limit = 5
   let slideElems: JSX.Element[] = []
@@ -25,6 +32,7 @@ function Header(props: Props) {
           title={props.movies[i].title}
           desc={props.movies[i].overview}
           backdrop={props.movies[i].backdrop}
+          showingID={props.movies[i].showings[0].id}
         />
       </SwiperSlide>
     )

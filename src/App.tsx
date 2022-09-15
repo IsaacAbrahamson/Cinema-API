@@ -25,7 +25,7 @@ function App() {
       <div id="page">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/showing:id" element={<Showing />} />
+          <Route path="/showing/:id" element={<Showing />} />
         </Routes>
       </div>
       <Footer />

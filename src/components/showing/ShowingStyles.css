@@ -1,0 +1,108 @@
+.back-btn {
+  display: flex;
+  align-items: center;
+  color: var(--orange);
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+.back-btn svg {
+  height: 40px;
+  width: 40px;
+  margin-left: -15px;
+  margin-right: -5px;
+}
+
+.back-btn path {
+  fill: var(--orange)
+}
+
+/*=============================================
+=        ShowingInfo                          =
+=============================================*/
+
+.showing-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+.showing-info .showing--title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 48px;
+  letter-spacing: -2px;
+  line-height: 90%;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.showing-info .showing--header {
+  font-weight: 700;
+  font-size: 26px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.showing-info .showing--text {
+  font-size: 18px;
+  color: var(--transparent-white);
+  line-height: 130%;
+}
+
+.showing-info .showing--text span {
+  font-size: 17px;
+  color: var(--orange);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+
+
+/*=============================================
+=        Tickets                              =
+=============================================*/
+.showing-screen {
+  background: var(--orange);
+  color: black;
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  padding: 2px 0;
+}
+
+
+.tickets-container {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(16, 1fr);
+  margin-bottom: 50px;
+}
+
+.tickets--ticket {
+  background: #555;
+  color: #6f6f6f;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tickets--ticket.reserved {
+  background: black;
+  color: #333333;
+}
