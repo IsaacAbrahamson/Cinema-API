@@ -6,8 +6,7 @@ function Navbar() {
     <nav>
       <img src={Logo} alt="3's Cinema" className='logo' />
       <div className="nav-links">
-        <p className='nav--link'>Login</p>
-        <Cart className='nav--icon' />
+        <div className='nav--link'>Cart<Cart className='nav--icon' /></div>
       </div>
     </nav>
   )

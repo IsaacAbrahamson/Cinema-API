@@ -99,15 +99,18 @@ nav .nav-links .nav--link {
   color: var(--transparent-white);
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  margin-right: 20px;
   font-size: 18px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 200ms;
 }
 
 nav svg.nav--icon {
   width: 40px;
   height: 40px;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 nav svg.nav--icon path {
@@ -115,7 +118,11 @@ nav svg.nav--icon path {
   transition: all 200ms;
 }
 
-nav svg.nav--icon:hover path {
+nav .nav--link:hover {
+  color: var(--transparent-hover);
+}
+
+nav .nav--link:hover path {
   fill: var(--transparent-hover);
 }
 
@@ -236,6 +243,11 @@ header .header-text .header--ticketBtn:hover {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   cursor: pointer;
+  transition: color 200ms;
+}
+
+.showing-selector .selector-day:hover {
+  color: var(--transparent-hover);
 }
 
 .showing-selector .selector-day.active {
@@ -304,6 +316,12 @@ header .header-text .header--ticketBtn:hover {
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 200ms;
+}
+
+.showing-item-showtimes .showtime:hover {
+  color: var(--transparent-hover);
+  border: 1px solid var(--transparent-hover);
 }
 
 
