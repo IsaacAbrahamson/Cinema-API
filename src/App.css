@@ -87,7 +87,7 @@ nav {
 
 nav img.logo {
   display: block;
-  height: 50%;
+  height: 45px;
 }
 
 nav .nav-links {
@@ -215,6 +215,7 @@ header .header-text .header--ticketBtn:hover {
 /*=============================================
 =        Showings                             =
 =============================================*/
+
 .showings {
   width: 90%;
   max-width: 1000px;
@@ -231,6 +232,10 @@ header .header-text .header--ticketBtn:hover {
   margin-top: 50px;
   display: flex;
   align-items: center;
+}
+
+.showing-item:last-of-type {
+  border: none;
 }
 
 .showing-item-poster {
@@ -283,4 +288,50 @@ header .header-text .header--ticketBtn:hover {
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+
+
+/*=============================================
+=        Footer                               =
+=============================================*/
+
+footer {
+  background-color: var(--black);
+  padding: 50px;
+}
+
+footer .footer-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+footer .footer-logo img {
+  display: block;
+  height: 45px;
+}
+
+footer .footer-text {
+  color: white;
+  margin-left: 50px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  width: 25vw;
+}
+
+footer .footer--header {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+footer .footer--desc {
+  font-size: 16px;
+  color: var(--transparent-white);
+  margin: 10px 0;
+}
+
+footer a.footer--link {
+  color: var(--orange)
 }

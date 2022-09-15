@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Nav'
 import Header from './components/Header'
 import Showings from './components/Showings'
+import Footer from './components/Footer'
 import './App.css'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Header movies={movies} />
         <Showings />
       </>}
+      <Footer />
     </div>
   )
 }

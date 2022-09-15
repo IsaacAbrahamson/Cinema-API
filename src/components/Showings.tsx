@@ -24,19 +24,24 @@ function Showings() {
     return ('0' + date).slice(-2)
   }
 
-  const showingItems = showings.map(e => {
-    return (
-      <ShowingItem
-        key={e.id}
-        id={e.id}
-        title={e.title}
-        desc={e.overview}
-        poster={e.poster}
-        backdrop={e.backdrop}
-        showings={e.showings}
-      />
-    )
-  })
+  // Only render 10 movies
+  let showingItems: JSX.Element[] = []
+  const limit = 10
+  if (showings.length > 0) {
+    for (let i = 0; i < limit; i++) {
+      showingItems.push(
+        <ShowingItem
+          key={showings[i].id}
+          id={showings[i].id}
+          title={showings[i].title}
+          desc={showings[i].overview}
+          poster={showings[i].poster}
+          backdrop={showings[i].backdrop}
+          showings={showings[i].showings}
+        />
+      )
+    }
+  }
 
   return (
     <main className='showings'>
