@@ -2,7 +2,6 @@ import { MouseEventHandler, useState } from "react"
 
 interface Props {
   tickets: any,
-  updateCart: any,
   updateTickets: any
 }
 

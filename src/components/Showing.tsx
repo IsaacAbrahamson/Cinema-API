@@ -57,8 +57,8 @@ function Showing(props: Props) {
         trailer={showing.Movie.trailer}
         poster={showing.Movie.poster}
       />}
-      {tickets && <TicketCount tickets={tickets} />}
-      {tickets && <ShowingTickets tickets={tickets} updateCart={props.updateCart} updateTickets={updateTickets} />}
+      {tickets && <TicketCount tickets={tickets} updateCart={props.updateCart} />}
+      {tickets && <ShowingTickets tickets={tickets} updateTickets={updateTickets} />}
     </div>
   )
 }

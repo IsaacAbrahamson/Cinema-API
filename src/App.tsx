@@ -20,15 +20,15 @@ function App() {
     setMovies(data)
   }
 
-  function updateCart(ids: number[]) {
+  function updateCart(ids: any[]) {
     setCart(prev => {
-      return [...prev, ids]
+      return [...prev, ...ids]
     })
   }
 
   return (
     <div className='app'>
-      <Navbar />
+      <Navbar cart={cart} updateCart={updateCart} />
       <div id="page">
         <Routes>
           <Route path="/" element={<Home />} />
