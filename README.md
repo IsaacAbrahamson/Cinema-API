@@ -50,7 +50,8 @@ Those seats will be updated when a user buys them
 
 ### movie endpoint
 GET `/api/movie/all`
-GET `/api/movie/search?id=1`
+GET `/api/movie/searchMovie?id=1`
+GET `/api/movie/searchShowing?id=1`
 GET `/api/movie/favorites?date=2022-09-06`
 GET `/api/movie/showings?date=2022-09-06`
 

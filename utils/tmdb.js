@@ -72,7 +72,8 @@ export async function getTrailer(id) {
   const trailers = data.results.filter(video => video.type = 'Trailer').reverse()
 
   if (trailers[0]) {
-    return 'https://www.youtube.com/watch?v=' + trailers[0].key
+    return trailers[0].key
+    // return 'https://www.youtube.com/watch?v=' + trailers[0].key
   } else {
     return null
   }
