@@ -70,7 +70,7 @@
 =        Tickets                              =
 =============================================*/
 .showing-screen {
-  background: var(--orange);
+  background: #CCC;
   color: black;
   text-align: center;
   margin-bottom: 12px;
@@ -110,4 +110,38 @@
 .tickets--ticket.chosen {
   background: #ffbd8c;
   color: #ffe3cf;
+}
+
+.ticket-count {
+  margin-bottom: 20px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.ticket-count .showing--header {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.ticket-count .checkout-btn {
+  background-color: var(--orange);
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 200ms;
+  color: white;
+  text-decoration: none;
+}
+
+.ticket-count .checkout-btn:hover {
+  background-color: var(--transparent-hover);
 }

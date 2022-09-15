@@ -2,6 +2,7 @@ import { useState, useEffect, MouseEventHandler } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import ShowingInfo from './showing/ShowingInfo'
 import ShowingTickets from './showing/ShowingTickets'
+import TicketCount from './showing/TicketCount'
 import { ReactComponent as Back } from '../assets/back.svg'
 import './showing/ShowingStyles.css'
 
@@ -56,6 +57,7 @@ function Showing(props: Props) {
         trailer={showing.Movie.trailer}
         poster={showing.Movie.poster}
       />}
+      {tickets && <TicketCount tickets={tickets} />}
       {tickets && <ShowingTickets tickets={tickets} updateCart={props.updateCart} updateTickets={updateTickets} />}
     </div>
   )
