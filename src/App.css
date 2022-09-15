@@ -119,6 +119,8 @@ nav svg.nav--icon:hover path {
   fill: var(--transparent-hover);
 }
 
+
+
 /*=============================================
 =        Header                               =
 =============================================*/
@@ -207,3 +209,9 @@ header .header-text .header--ticketBtn {
 header .header-text .header--ticketBtn:hover {
   background-color: var(--transparent-hover);
 }
+
+
+
+/*=============================================
+=        Showings                             =
+=============================================*/

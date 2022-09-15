@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Navbar from './components/Nav'
 import Header from './components/Header'
+import Showings from './components/Showings'
 import './App.css'
 
 function App() {
@@ -19,8 +20,10 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      {movies.length > 0 && <Header movies={movies} />}
-      <div style={{ height: "1000px" }}></div>
+      {movies.length > 0 && <>
+        <Header movies={movies} />
+        <Showings />
+      </>}
     </div>
   )
 }
