@@ -20,6 +20,7 @@ function App() {
     <div className="App">
       <Navbar />
       {movies.length > 0 && <Header movies={movies} />}
+      <div style={{ height: "1000px" }}></div>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 interface Props {
   title: String,
   desc: String,
@@ -5,10 +7,23 @@ interface Props {
 }
 
 function HeaderSlide(props: Props) {
+  const [offset, setOffset] = useState(window.scrollY)
+
+  function updateOffset() {
+    setOffset(window.scrollY)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', updateOffset)
+    return (() => {
+      window.removeEventListener('scroll', updateOffset)
+    })
+  }, [])
+
   return (
-    <div className='header-slide' style={{ backgroundImage: `url(${props.backdrop})` }}>
+    <div className='header-slide' style={{ backgroundImage: `url(${props.backdrop})`, backgroundPositionY: `${offset * 0.7}px` }}>
       <div className="header-overlay"></div>
-      <div className="header-text">
+      <div className="header-text" style={{ transform: `translateY(${offset * 0.4}px)` }}>
         <p className="header--subtitle">now showing</p>
         <p className="header--title">{props.title}</p>
         <p className="header--desc">{props.desc}</p>
