@@ -76,3 +76,12 @@ Run the ./utils/updateDB.js file or just do the following script:
 ```
 npm run update
 ```
+
+## .env file
+```
+TMDB_API_KEY="..."
+DB_NAME="..."
+DB_HOST="..."
+DB_USER="..."
+DB_PASS="..."
+```

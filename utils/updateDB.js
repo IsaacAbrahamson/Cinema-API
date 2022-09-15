@@ -20,8 +20,8 @@ try {
   const favorites = await getFavorites()
 
   // Add movies table to database
-  await createMovies(showings, false, transaction)
   await createMovies(favorites, true, transaction)
+  await createMovies(showings, false, transaction)
 
   // Add showings table to database for 7 days
   const times = createTimes(favorites, showings, 7)
