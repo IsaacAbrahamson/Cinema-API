@@ -21,7 +21,7 @@ function ShowingInfo(props: Movie) {
       <h3 className='showing--header'>Details</h3>
       <p className='showing--text'><span>Time: </span>{props.time}</p>
       <p className='showing--text'><span>Room: </span>{props.room}</p>
-      <h3 className='showing--header'>Available Tickets</h3>
+      <h3 className='showing--header'>Select Tickets</h3>
     </div>
   )
 }

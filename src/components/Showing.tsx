@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, MouseEventHandler } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import ShowingInfo from './showing/ShowingInfo'
 import ShowingTickets from './showing/ShowingTickets'
 import { ReactComponent as Back } from '../assets/back.svg'
 import './showing/ShowingStyles.css'
 
-function Showing() {
+interface Props {
+  cart: any,
+  updateCart: any
+}
+
+function Showing(props: Props) {
   const params = useParams()
   const navigate = useNavigate()
 
-  const [tickets, setTickets] = useState([])
+  const [tickets, setTickets] = useState<any[]>([])
   const [showing, setShowing] = useState<{ [key: string]: any }>({})
 
   useEffect(() => {
@@ -26,8 +31,17 @@ function Showing() {
     setShowing(movieData[0])
   }
 
-  function updateTickets(ticketID: number) {
-    console.log('ticketID', ticketID)
+  function updateTickets(e: any) {
+    const id = e.target.getAttribute('data-id')
+    // For every ticket
+    setTickets(prev => prev.map(obj => {
+      if (obj.id == id && obj.available) {
+        return { ...obj, chosen: !obj.chosen }
+      } else {
+        return { ...obj }
+      }
+
+    }))
   }
 
   return (
@@ -42,7 +56,7 @@ function Showing() {
         trailer={showing.Movie.trailer}
         poster={showing.Movie.poster}
       />}
-      {tickets && <ShowingTickets tickets={tickets} updateTickets={updateTickets} />}
+      {tickets && <ShowingTickets tickets={tickets} updateCart={props.updateCart} updateTickets={updateTickets} />}
     </div>
   )
 }

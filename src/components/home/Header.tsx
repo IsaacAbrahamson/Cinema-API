@@ -19,7 +19,6 @@ interface Props {
 }
 
 function Header(props: Props) {
-  console.log(props)
   // Only render five movies in header
   const limit = 5
   let slideElems: JSX.Element[] = []

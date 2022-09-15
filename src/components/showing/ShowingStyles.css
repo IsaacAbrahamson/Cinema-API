@@ -106,3 +106,8 @@
   background: black;
   color: #333333;
 }
+
+.tickets--ticket.chosen {
+  background: #ffbd8c;
+  color: #ffe3cf;
+}

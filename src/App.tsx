@@ -8,6 +8,7 @@ import './App.css'
 
 function App() {
   const [movies, setMovies] = useState([])
+  const [cart, setCart] = useState<any[]>([])
 
   useEffect(() => {
     fetchMovies()
@@ -19,13 +20,19 @@ function App() {
     setMovies(data)
   }
 
+  function updateCart(ids: number[]) {
+    setCart(prev => {
+      return [...prev, ids]
+    })
+  }
+
   return (
     <div className='app'>
       <Navbar />
       <div id="page">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/showing/:id" element={<Showing />} />
+          <Route path="/showing/:id" element={<Showing cart={cart} updateCart={updateCart} />} />
         </Routes>
       </div>
       <Footer />

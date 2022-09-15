@@ -1,20 +1,34 @@
+import { MouseEventHandler, useState } from "react"
+
 interface Props {
   tickets: any,
-  updateTickets: Function
+  updateCart: any,
+  updateTickets: any
 }
 
 interface Ticket {
   seat_row: string,
   seat_col: number,
-  available: boolean
+  available: boolean,
+  chosen: false,
+  id: number
 }
 
 function ShowingTickets(props: Props) {
   const ticketElems = props.tickets.map((ticket: Ticket) => {
+    let classname = 'tickets--ticket'
+    if (!ticket.available) {
+      classname += ' reserved'
+    } else if (ticket.chosen) {
+      classname += ' chosen'
+    }
+
     return (
       <div
-        key={ticket.seat_row + ticket.seat_col}
-        className={ticket.available ? "tickets--ticket" : "tickets--ticket reserved"}
+        key={ticket.id}
+        data-id={ticket.id}
+        className={classname}
+        onClick={props.updateTickets}
       >
         {ticket.seat_row}{ticket.seat_col}
       </div>
