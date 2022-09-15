@@ -18,9 +18,11 @@ function ShowingInfo(props: Movie) {
       <LiteYouTubeEmbed id={props.trailer} title={props.title} />
       <h3 className='showing--header'>Overview</h3>
       <p className='showing--text'>{props.desc}</p>
+      <div className="showing-info--line"></div>
       <h3 className='showing--header'>Details</h3>
       <p className='showing--text'><span>Time: </span>{props.time}</p>
       <p className='showing--text'><span>Room: </span>{props.room}</p>
+      <div className="showing-info--line"></div>
     </div>
   )
 }
