@@ -37,7 +37,7 @@ function Header(props: Props) {
         slidesPerView={1}
         navigation
         loop={true}
-        autoplay={{ delay: 8000 }}
+        autoplay={{ delay: 6000 }}
         pagination={{ clickable: true }}
       >
         {slideElems}
