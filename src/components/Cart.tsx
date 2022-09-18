@@ -18,7 +18,7 @@ function Cart(props: any) {
             <p className="cart-item--text"><span>Room:</span> {e.movie.room}</p>
             <p className="cart-item--text"><span>Seat:</span> {e.ticket.seat_row}{e.ticket.seat_col}</p>
           </div>
-          <div className="cart-remove">Delete <Trash /></div>
+          <div className="cart-remove" onClick={() => props.removeCartItem(e.ticket.id)}>Delete <Trash /></div>
         </div>
       )
     })

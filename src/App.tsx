@@ -6,10 +6,21 @@ import Navbar from './components/Nav'
 import Footer from './components/Footer'
 import Cart from './components/Cart'
 import './App.css'
+import { mdiAppleKeyboardShift } from '@mdi/js'
+
+interface Cart {
+  ticket: {
+    id: number,
+    seat_col: number,
+    seat_row: string,
+    available: boolean
+  }
+  movie: any
+}
 
 function App() {
   const [movies, setMovies] = useState([])
-  const [cart, setCart] = useState<any[]>([])
+  const [cart, setCart] = useState<Cart[]>([])
 
   useEffect(() => {
     fetchMovies()
@@ -36,6 +47,12 @@ function App() {
     })
   }
 
+  function removeCartItem(id: number) {
+    setCart(prev => {
+      return prev.filter(obj => obj.ticket.id !== id)
+    })
+  }
+
   return (
     <div className='app'>
       <Navbar cart={cart} updateCart={updateCart} />
@@ -43,7 +60,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/showing/:id" element={<Showing cart={cart} updateCart={updateCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} />} />
+          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} />} />
         </Routes>
       </div>
       <Footer />
