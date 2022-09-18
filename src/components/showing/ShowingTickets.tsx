@@ -2,7 +2,7 @@ import { MouseEventHandler, useState } from "react"
 
 interface Props {
   tickets: any,
-  updateTickets: any
+  chooseTicket: Function
 }
 
 interface Ticket {
@@ -26,7 +26,7 @@ function ShowingTickets(props: Props) {
       <div
         key={ticket.id}
         className={classname}
-        onClick={() => props.updateTickets(ticket.id)}
+        onClick={() => props.chooseTicket(ticket.id)}
       >
         {ticket.seat_row}{ticket.seat_col}
       </div>

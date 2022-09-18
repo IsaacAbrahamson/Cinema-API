@@ -11,16 +11,25 @@ interface Props {
   updateCart: any
 }
 
+interface Ticket {
+  available: boolean,
+  chosen?: boolean,
+  email?: string,
+  id: number,
+  seat_col: string,
+  seat_row: string
+}
+
 function Showing(props: Props) {
   const params = useParams()
   const navigate = useNavigate()
 
-  const [tickets, setTickets] = useState<any[]>([])
+  const [tickets, setTickets] = useState<Ticket[]>([])
   const [showing, setShowing] = useState<{ [key: string]: any }>({})
 
   useEffect(() => {
     callAPI()
-  }, [])
+  }, [props.cart])
 
   async function callAPI() {
     let ticketRes = await fetch(`/api/ticket/all?showingId=${params.id}`)
@@ -32,7 +41,7 @@ function Showing(props: Props) {
     setShowing(movieData[0])
   }
 
-  function updateTickets(id: number) {
+  function chooseTicket(id: number) {
     // For every ticket
     setTickets(prev => prev.map(obj => {
       if (obj.id == id && obj.available) {
@@ -57,7 +66,7 @@ function Showing(props: Props) {
         poster={showing.Movie.poster}
       />}
       {tickets && <TicketCount tickets={tickets} updateCart={props.updateCart} />}
-      {tickets && <ShowingTickets tickets={tickets} updateTickets={updateTickets} />}
+      {tickets && <ShowingTickets tickets={tickets} chooseTicket={chooseTicket} />}
     </div>
   )
 }

@@ -32,21 +32,34 @@ function App() {
   }
 
   async function updateCart(tickets: any[]) {
-    // get all movie data into cart
     let newCart: any = []
+
     for (let ticket of tickets) {
+      // set ticket as unavailable
+      const post = await fetch('/api/ticket/reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: ticket.id, reserve: true }),
+      })
+
+      // update cart with ticket and movie information
       const res = await fetch(`/api/movie/searchShowing?id=${ticket.showingId}`)
       const [movie] = await res.json()
       newCart.push({ ticket, movie })
     }
 
-    // update cart
     setCart(prev => {
       return [...prev, ...newCart]
     })
   }
 
-  function removeCartItem(id: number) {
+  async function removeCartItem(id: number) {
+    const post = await fetch('/api/ticket/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, reserve: false }),
+    })
+
     setCart(prev => {
       return prev.filter(obj => obj.ticket.id !== id)
     })
