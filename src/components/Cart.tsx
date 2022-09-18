@@ -1,12 +1,9 @@
 import { ReactComponent as Trash } from '../assets/delete.svg'
 
 function Cart(props: any) {
-  console.log(props.cart)
-
   let cartElems: any = []
   if (props.cart.length > 0) {
     cartElems = props.cart.map((e: any) => {
-      console.log('e: ', e)
       return (
         <div className="cart-item" key={e.ticket.id}>
           <div className="cart-item-poster">

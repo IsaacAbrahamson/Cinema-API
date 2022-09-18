@@ -6,7 +6,6 @@ import Navbar from './components/Nav'
 import Footer from './components/Footer'
 import Cart from './components/Cart'
 import './App.css'
-import { mdiAppleKeyboardShift } from '@mdi/js'
 
 interface Cart {
   ticket: {
@@ -36,7 +35,7 @@ function App() {
     // get all movie data into cart
     let newCart: any = []
     for (let ticket of tickets) {
-      const res = await fetch(`/api/movie/searchShowing?id=${ticket.id}`)
+      const res = await fetch(`/api/movie/searchShowing?id=${ticket.showingId}`)
       const [movie] = await res.json()
       newCart.push({ ticket, movie })
     }
