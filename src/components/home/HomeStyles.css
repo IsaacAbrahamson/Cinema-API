@@ -102,9 +102,12 @@ header .header-text .header--ticketBtn:hover {
 
 .showing-selector {
   color: white;
-  margin-top: 50px;
+  padding: 50px 0;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 10vh;
+  background: #171717;
 }
 
 .showing-selector .selector-day {
@@ -128,7 +131,7 @@ header .header-text .header--ticketBtn:hover {
 
 .showing-item {
   border-bottom: 1px solid rgba(161, 161, 161, 0.3);
-  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   align-items: center;
 }
