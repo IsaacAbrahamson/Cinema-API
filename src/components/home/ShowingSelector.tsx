@@ -10,9 +10,9 @@ interface Day {
 function ShowingSelector(props: any) {
   const [activeDay, setActiveDay] = useState(0)
 
-  function updateDay(e: any) {
-    setActiveDay(e.target.getAttribute('data-id'))
-    props.updateDate(e.target.getAttribute('data-date'))
+  function updateDay(id: number, date: string) {
+    setActiveDay(id)
+    props.updateDate(date)
   }
 
   // Create an array with the days of the week from today

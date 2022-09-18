@@ -25,9 +25,8 @@ function ShowingTickets(props: Props) {
     return (
       <div
         key={ticket.id}
-        data-id={ticket.id}
         className={classname}
-        onClick={props.updateTickets}
+        onClick={() => props.updateTickets(ticket.id)}
       >
         {ticket.seat_row}{ticket.seat_col}
       </div>

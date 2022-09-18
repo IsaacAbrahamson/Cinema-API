@@ -10,9 +10,7 @@ function ShowingSelectorDay(props: Props) {
   return (
     <div
       className={props.active ? "selector-day active" : "selector-day"}
-      onClick={props.handleClick}
-      data-id={props.id}
-      data-date={props.date}
+      onClick={() => props.handleClick(props.id, props.date)}
     >
       {props.name}
     </div>

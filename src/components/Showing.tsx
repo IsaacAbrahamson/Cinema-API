@@ -32,8 +32,7 @@ function Showing(props: Props) {
     setShowing(movieData[0])
   }
 
-  function updateTickets(e: any) {
-    const id = e.target.getAttribute('data-id')
+  function updateTickets(id: number) {
     // For every ticket
     setTickets(prev => prev.map(obj => {
       if (obj.id == id && obj.available) {
