@@ -205,3 +205,73 @@ footer a.footer--link {
   font-family: 'Inter', sans-serif;
   padding-top: 50px;
 }
+
+.cart-item {
+  border-bottom: 1px solid rgba(161, 161, 161, 0.3);
+  display: flex;
+  padding: 30px 0;
+  align-items: center;
+  position: relative;
+}
+
+.cart-item:last-of-type {
+  border-bottom: none;
+}
+
+.cart-item .cart-item-poster img {
+  display: block;
+  max-height: 150px;
+}
+
+.cart-item .cart-item--title {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.cart-item .cart-item-details {
+  padding-left: 20px;
+}
+
+.cart-item .cart-item--text {
+  font-size: 18px;
+  color: var(--transparent-white);
+  line-height: 130%;
+}
+
+.cart-item .cart-item--text span {
+  font-size: 17px;
+  color: var(--orange);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cart-remove {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: var(--transparent-white);
+  transition: all 200ms;
+}
+
+.cart-remove:hover {
+  color: white;
+}
+
+.cart-remove svg {
+  width: 30px;
+  height: 30px;
+}
+
+.cart-remove path {
+  fill: var(--transparent-white);
+  transition: all 200ms;
+}
+
+.cart-remove:hover path {
+  fill: white;
+}

@@ -26,8 +26,8 @@ function App() {
     let newCart: any = []
     for (let ticket of tickets) {
       const res = await fetch(`/api/movie/searchShowing?id=${ticket.id}`)
-      const [data] = await res.json()
-      newCart.push({ ticket, data })
+      const [movie] = await res.json()
+      newCart.push({ ticket, movie })
     }
 
     // update cart
