@@ -1,6 +1,15 @@
+import Checkout from './Checkout'
+import { useState } from 'react'
 import { ReactComponent as Trash } from '../assets/delete.svg'
 
+interface Contact {
+  name?: string,
+  email?: string
+}
+
 function Cart(props: any) {
+  const [contact, setContact] = useState<Contact>({})
+
   let cartElems: any = []
   if (props.cart.length > 0) {
     cartElems = props.cart.map((e: any) => {
@@ -21,14 +30,22 @@ function Cart(props: any) {
     })
   }
 
+  function updateContact(e: any) {
+
+  }
+
   return (
     <div className="cart">
+
       <h1 className="cart-title">Cart:</h1>
       <div className="cart-items">
         {props.cart.length == 0 && <p>You have no items in your cart!</p>}
         {props.cart.length > 0 && cartElems}
       </div>
-    </div>
+
+      {props.cart.length > 0 && <Checkout cart={props.cart} />}
+
+    </div >
   )
 }
 

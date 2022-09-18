@@ -51,6 +51,8 @@ function App() {
     setCart(prev => {
       return [...prev, ...newCart]
     })
+
+    alert('Selected tickets have been added to your cart!')
   }
 
   async function removeCartItem(id: number) {
