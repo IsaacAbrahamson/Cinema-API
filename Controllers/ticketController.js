@@ -17,7 +17,34 @@ export async function findTickets(req, res) {
   }
 }
 
-// Example: /api/ticket/buy?id=1&email=test@email.com&name=Test
+
+// Example: /api/ticket/reserve
+export async function reserveTicket(req, res) {
+  try {
+    // Find and update ticket
+    const ticket = await Ticket.findOne({
+      where: {
+        id: req.body.id
+      }
+    })
+
+    // Set ticket unavailable
+    ticket.available = !req.body.reserve
+    await ticket.save()
+
+    res.json({
+      id: ticket.id,
+      status: 'changed status'
+    })
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
+}
+
+
+
+// Example: /api/ticket/buy
 export async function buyTicket(req, res) {
   try {
     // Find and update ticket
