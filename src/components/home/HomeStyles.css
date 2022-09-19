@@ -146,7 +146,7 @@ header .header-text .header--ticketBtn:hover {
 =============================================*/
 
 .showings {
-  width: 90%;
+  width: 92%;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -249,4 +249,47 @@ header .header-text .header--ticketBtn:hover {
 .showing-item-showtimes .showtime:hover {
   color: var(--transparent-hover);
   border: 1px solid var(--transparent-hover);
+}
+
+@media screen and (max-width: 800px) {
+  .showing-selector {
+    top: 7vh;
+    padding: 30px 0;
+  }
+
+  .showing-item-text {
+    padding: 30px
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .showing-item--title {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+
+  .showing-item {
+    display: block;
+  }
+
+  .showing-item-poster {
+    width: 30%;
+    float: left;
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+
+  .showing-item-text {
+    width: 100%;
+    padding: 0;
+  }
+
+  .showing-item--desc {
+    margin-bottom: 0;
+  }
+
+  .showing-item--header {
+    clear: both;
+    padding-top: 15px;
+  }
 }
