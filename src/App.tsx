@@ -19,11 +19,20 @@ interface Cart {
 
 function App() {
   const [movies, setMovies] = useState([])
-  const [cart, setCart] = useState<Cart[]>([])
+  const [cart, setCart] = useState<Cart[]>(() => {
+    const prevCart = localStorage.getItem('cart')
+    return prevCart ? JSON.parse(prevCart) : []
+  })
 
+  // Call api and load in localStorage on load
   useEffect(() => {
     fetchMovies()
   }, [])
+
+  // Update local storage whenever cart changes
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   async function fetchMovies() {
     const res = await fetch('/api/movie/all')
