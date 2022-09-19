@@ -292,4 +292,12 @@ header .header-text .header--ticketBtn:hover {
     clear: both;
     padding-top: 15px;
   }
+
+  .showing-item-showtimes .showtime {
+    margin-bottom: 10px;
+  }
+
+  .showing-item-text {
+    margin-bottom: 40px;
+  }
 }
