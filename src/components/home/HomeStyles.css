@@ -2,16 +2,8 @@
 =        Header                               =
 =============================================*/
 
-header {
-  height: 80vh;
-}
-
-header .swiper {
-  height: 100%;
-}
-
 header .header-slide {
-  height: 100%;
+  min-height: 80vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: center;
@@ -39,6 +31,7 @@ header .header-text {
   font-weight: 400;
   width: 35%;
   margin-left: 15%;
+  padding: 50px 0;
 }
 
 header .header-text .header--subtitle {
@@ -88,6 +81,57 @@ header .header-text .header--ticketBtn:hover {
   background-color: var(--transparent-hover);
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  margin: 0 40px;
+}
+
+@media screen and (max-width: 1200px) {
+  header .header-text {
+    width: 100%;
+    margin: 0 15%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  header .header-text .header--title {
+    font-size: 50px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-navigation-size: 30px;
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header .header-overlay {
+    background: rgba(17, 17, 17, 0.85);
+  }
+
+  header .header-text .header--subtitle {
+    font-size: 14px;
+  }
+
+  header .header-text .header--title {
+    font-size: 42px;
+  }
+
+  header .header-text .header--desc {
+    font-size: 18px;
+  }
+
+  header .header-text a.header--ticketBtn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
 
 
 /*=============================================

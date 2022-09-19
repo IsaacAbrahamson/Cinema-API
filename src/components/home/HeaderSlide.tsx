@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 
 interface Props {
   id: number,
-  title: String,
-  desc: String,
-  backdrop: String,
+  title: string,
+  desc: string,
+  backdrop: string,
   showingID: number,
 }
 
@@ -23,13 +23,18 @@ function HeaderSlide(props: Props) {
     })
   }, [])
 
+  function truncateDesc(desc: string, length: number): string {
+    const truncated = desc.substring(0, length).trim() + '...'
+    return desc.length > length ? truncated : desc
+  }
+
   return (
     <div className='header-slide' style={{ backgroundImage: `url(${props.backdrop})`, backgroundPositionY: `${offset * 0.7}px` }}>
       <div className="header-overlay"></div>
       <div className="header-text" style={{ transform: `translateY(${offset * -0.7}px)` }}>
         <p className="header--subtitle">now showing</p>
         <p className="header--title">{props.title}</p>
-        <p className="header--desc">{props.desc}</p>
+        <p className="header--desc">{truncateDesc(props.desc, 200)}</p>
         <Link to={`showing/${props.id}`} className='header--ticketBtn'>Get Tickets</Link>
       </div>
     </div>

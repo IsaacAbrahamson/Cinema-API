@@ -60,6 +60,7 @@ body {
   --transparent-white: rgba(255, 255, 255, 0.7);
   --transparent-hover: rgba(100, 100, 100, 0.5);
   --swiper-theme-color: var(--transparent-white);
+  --swiper-navigation-size: 40px;
 }
 
 body {
