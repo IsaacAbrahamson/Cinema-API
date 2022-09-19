@@ -145,6 +145,26 @@ nav .cart--count {
   font-size: 12px;
 }
 
+@media screen and (max-width: 600px) {
+  nav img.logo {
+    height: 30px;
+  }
+
+  nav .nav-links .nav--link {
+    font-size: 14px;
+  }
+
+  nav svg.nav--icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+  }
+
+  nav {
+    height: 7vh;
+  }
+}
+
 
 
 /*=============================================
@@ -154,6 +174,12 @@ nav .cart--count {
 #page {
   min-height: 50vh;
   margin-top: 10vh;
+}
+
+@media screen and (max-width: 600px) {
+  #page {
+    margin-top: 7vh;
+  }
 }
 
 
