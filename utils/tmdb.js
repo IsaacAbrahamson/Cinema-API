@@ -7,7 +7,7 @@ dotenv.config()
 
 // Finds the movies that are currently playing in theaters
 export async function getShowings() {
-  const beginDate = new Date(new Date().setDate(new Date().getDate() - 30))
+  const beginDate = new Date(new Date().setDate(new Date().getDate() - 14))
   const beginString = beginDate.toISOString().split('T')[0]
   const endDate = new Date(new Date().setDate(new Date().getDate() + 7))
   const endString = endDate.toISOString().split('T')[0]
@@ -38,7 +38,7 @@ export async function getShowings() {
 
 // Gets the most popular movies that are staying theaters
 export async function getFavorites() {
-  const beginDate = new Date(new Date().setDate(new Date().getDate() - 90))
+  const beginDate = new Date(new Date().setDate(new Date().getDate() - 30))
   const beginString = beginDate.toISOString().split('T')[0]
 
   const options = [
