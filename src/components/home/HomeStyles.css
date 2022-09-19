@@ -94,6 +94,10 @@ header .header-text .header--ticketBtn:hover {
 }
 
 @media screen and (max-width: 800px) {
+  header .header-text {
+    margin: 0 8%;
+  }
+
   header .header-text .header--title {
     font-size: 50px;
   }

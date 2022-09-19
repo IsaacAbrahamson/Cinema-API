@@ -276,7 +276,7 @@ footer {
 =        Cart                                 =
 =============================================*/
 .cart {
-  width: 100%;
+  width: 92%;
   max-width: 1000px;
   margin: 0 auto;
   color: white;
@@ -442,4 +442,50 @@ footer {
 .checkout .form-group {
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .cart-item .cart-item--title {
+    font-size: 20px;
+  }
+
+  .cart-item .cart-item-details {
+    padding-left: 15px;
+  }
+
+  .cart-item .cart-item--text {
+    font-size: 12px;
+  }
+
+  .cart-item .cart-item--text span {
+    font-size: 12px;
+  }
+
+  .checkout .form-group {
+    flex-direction: column;
+  }
+
+  .checkout .checkout-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .cart-remove p {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cart-item {
+    justify-content: space-between;
+  }
+
+  .cart-remove {
+    position: relative;
+    margin-left: 15px;
+  }
+
+  .checkout-title {
+    font-size: 16px;
+  }
 }
