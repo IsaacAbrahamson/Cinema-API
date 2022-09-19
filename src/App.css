@@ -239,6 +239,37 @@ footer {
   margin-top: auto;
 }
 
+@media screen and (max-width: 800px) {
+  footer {
+    padding: 50px 4%;
+  }
+
+  footer .footer-logo img {
+    height: 30px;
+    max-width: none;
+  }
+
+  footer .footer-text {
+    width: auto;
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  footer .footer-container {
+    flex-direction: column;
+  }
+
+  footer .footer-text {
+    width: auto;
+    margin-left: 0;
+  }
+
+  footer .footer--header {
+    display: none;
+  }
+}
+
 
 
 /*=============================================
