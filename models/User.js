@@ -1,5 +1,4 @@
 import { DataTypes } from 'sequelize'
-import Order from './Order.js'
 import db from '../utils/connectDB.js'
 
 const User = db.define('User', {
@@ -22,8 +21,5 @@ const User = db.define('User', {
 }, {
   timestamps: false
 })
-
-User.hasMany(Order)
-Order.belongsTo(User)
 
 export default User

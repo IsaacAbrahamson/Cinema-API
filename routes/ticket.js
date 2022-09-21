@@ -1,8 +1,21 @@
 import express from 'express'
-import { findTickets, buyTicket } from '../Controllers/ticketController.js'
+import Ticket from '../models/Ticket.js'
 const router = express.Router()
 
-router.get('/find', findTickets)
-router.post('/buy', buyTicket)
+// Given a showing ID, find any purchased tickets
+// Route: /api/ticket/find?showingId=1
+router.get('/find', async (req, res) => {
+  try {
+    const tickets = await Ticket.findAll({
+      where: {
+        showingId: req.query.showingId
+      }
+    })
+    res.json(tickets)
+  } catch (err) {
+    console.log(err)
+    res.json({ err: 'An error occured.' })
+  }
+})
 
 export default router
