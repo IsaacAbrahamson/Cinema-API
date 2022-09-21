@@ -1,4 +1,4 @@
-import { ICart, ITicket } from '../../types'
+import { ITicket } from '../../types'
 
 interface Props {
   tickets: ITicket[],
@@ -6,7 +6,7 @@ interface Props {
 }
 
 function TicketCount(props: Props) {
-  const chosenTickets = props.tickets.filter((ticket: any) => ticket.chosen)
+  const chosenTickets = props.tickets.filter((ticket: ITicket) => ticket.chosen)
   const ids = chosenTickets.map((e: any) => e.id)
 
   return (

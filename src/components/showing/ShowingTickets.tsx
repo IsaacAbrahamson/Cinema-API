@@ -12,6 +12,8 @@ function ShowingTickets(props: Props) {
       classname += ' reserved'
     } else if (ticket.active) {
       classname += ' active'
+    } else if (ticket.chosen) {
+      classname += ' chosen'
     }
 
     return (

@@ -25,11 +25,30 @@ function Showing(props: Props) {
   const [showing, setShowing] = useState<{ [key: string]: any }>({})
 
 
+  // Keep tickets state up-to-date with cart
+  useEffect(() => {
+    for (let { ticket } of props.cart) {
+      if (ticket.showingId !== showingId) return
+
+      // Update any tickets that come in from cart to active state
+      setTickets(prevTickets => {
+        let newTickets: ITicket[] = [...prevTickets]
+
+        // Find where seats amtch
+        const existing: number = newTickets.findIndex(e => e.seat === ticket.seat)
+        newTickets[existing].id = ticket.id
+        newTickets[existing].active = true
+        return newTickets
+      })
+    }
+  }, [props.cart])
+
+
   // Get reserved tickets and showing information on load
   useEffect(() => {
     callAPI()
   }, [])
-  async function callAPI() {
+  async function callAPI(): Promise<void> {
     // Get any tickets that exist for the showing
     let ticketRes = await fetch(`/api/ticket/find?showingId=${showingId}`)
     let ticketData: ITicket[] = await ticketRes.json()
@@ -53,13 +72,13 @@ function Showing(props: Props) {
   }
 
 
-  function chooseTicket(ticket: ITicket) {
+  function chooseTicket(ticket: ITicket): void {
     setTickets(prevTickets => prevTickets.map(prevTicket => {
-      // Do not update reserved seats
-      if (ticket.reserved) return { ...prevTicket }
+      // Do not update reserved or active seats
+      if (ticket.reserved || ticket.active) return { ...prevTicket }
       // Toggle the active class for the chosen seat
       if (prevTicket.seat == ticket.seat) {
-        return { ...prevTicket, active: !prevTicket.active }
+        return { ...prevTicket, chosen: !prevTicket.chosen }
       }
       return { ...prevTicket }
     }))

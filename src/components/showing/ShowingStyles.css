@@ -123,9 +123,14 @@
   color: #333333;
 }
 
-.tickets--ticket.active {
+.tickets--ticket.chosen {
   background: #ffbd8c;
   color: #ffe3cf;
+}
+
+.tickets--ticket.active {
+  background: #05b502;
+  color: #74ff71;
 }
 
 .ticket-count {

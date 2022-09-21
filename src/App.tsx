@@ -25,22 +25,19 @@ function App() {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [cart])
 
-  async function fetchMovies() {
+  async function fetchMovies(): Promise<void> {
     const res = await fetch('/api/movie/all')
     const data = await res.json()
     setMovies(data)
   }
 
-  async function updateCart(tickets: ITicket[]) {
+  async function updateCart(tickets: ITicket[]): Promise<void> {
     let newCart: any = []
 
     for (let ticket of tickets) {
-      // set ticket as unavailable
-      const post = await fetch('/api/ticket/reserve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: ticket.id, reserve: true }),
-      })
+      // set ticket as active
+      ticket.active = true
+      ticket.chosen = false
 
       // update cart with ticket and movie information
       const res = await fetch(`/api/movie/searchShowing?id=${ticket.showingId}`)
@@ -55,15 +52,9 @@ function App() {
     alert('Selected tickets have been added to your cart!')
   }
 
-  async function removeCartItem(id: number) {
-    const post = await fetch('/api/ticket/reserve', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, reserve: false }),
-    })
-
-    setCart(prev => {
-      return prev.filter(obj => obj.ticket.id !== id)
+  async function removeCartItem(showingId: number, seat: string): Promise<void> {
+    setCart(prevCart => {
+      return prevCart.filter(prevCartItem => prevCartItem.ticket.seat !== seat && prevCartItem.ticket.showingId !== showingId)
     })
   }
 

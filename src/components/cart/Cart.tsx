@@ -1,20 +1,20 @@
 import Checkout from './Checkout'
-import { useState } from 'react'
 import { ReactComponent as Trash } from '../../assets/delete.svg'
+import { ICart, ITicket } from '../../types'
+import { ReactElement } from 'react-imask/dist/mixin'
 
-interface Contact {
-  name?: string,
-  email?: string
+interface Props {
+  cart: ICart[],
+  updateCart: (tickets: ITicket[]) => void
+  removeCartItem: (showingId: number, seat: string) => void
 }
 
-function Cart(props: any) {
-  const [contact, setContact] = useState<Contact>({})
-
-  let cartElems: any = []
+function Cart(props: Props) {
+  let cartElems: JSX.Element[] = []
   if (props.cart.length > 0) {
-    cartElems = props.cart.map((e: any) => {
+    cartElems = props.cart.map((e: ICart) => {
       return (
-        <div className="cart-item" key={e.ticket.id}>
+        <div className="cart-item" key={e.ticket.showingId + e.ticket.seat}>
           <div className="cart-item-poster">
             <img src={e.movie.Movie.poster} alt={e.movie.Movie.title + ' poster'} />
           </div>
@@ -22,19 +22,15 @@ function Cart(props: any) {
             <h2 className="cart-item--title">{e.movie.Movie.title}</h2>
             <p className="cart-item--text"><span>Time:</span> {e.movie.time}</p>
             <p className="cart-item--text"><span>Room:</span> {e.movie.room}</p>
-            <p className="cart-item--text"><span>Seat:</span> {e.ticket.seat_row}{e.ticket.seat_col}</p>
+            <p className="cart-item--text"><span>Seat:</span> {e.ticket.seat}</p>
           </div>
-          <div className="cart-remove" onClick={() => props.removeCartItem(e.ticket.id)}>
+          <div className="cart-remove" onClick={() => props.removeCartItem(e.ticket.showingId, e.ticket.seat)}>
             <p>Delete</p>
             <Trash />
           </div>
         </div>
       )
     })
-  }
-
-  function updateContact(e: any) {
-
   }
 
   return (
