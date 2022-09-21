@@ -5,6 +5,29 @@
 - Accounted for race conditions when updating database by using MySQL transaction locks
 - Created algorithm to schedule showtimes based on popularity
 
+## Getting Started
+
+Install dependencies
+```
+npm install
+```
+Create `.env` file
+```
+TMDB_API_KEY="..."
+DB_NAME="..."
+DB_HOST="..."
+DB_USER="..."
+DB_PASS="..."
+```
+Create database in MySQL
+```
+CREATE DATABASE cinema;
+```
+Update database
+```
+npm run update dropall
+```
+
 
 ## Calling API
 
@@ -45,13 +68,4 @@ npm run update
 
 # recreate all tables including users and orders
 npm run update dropall
-```
-
-## .env file
-```
-TMDB_API_KEY="..."
-DB_NAME="..."
-DB_HOST="..."
-DB_USER="..."
-DB_PASS="..."
 ```
