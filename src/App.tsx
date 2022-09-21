@@ -53,8 +53,9 @@ function App() {
   }
 
   async function removeCartItem(showingId: number, seat: string): Promise<void> {
+    const itemID: string = showingId + seat
     setCart(prevCart => {
-      return prevCart.filter(prevCartItem => prevCartItem.ticket.seat !== seat && prevCartItem.ticket.showingId !== showingId)
+      return prevCart.filter(prevCartItem => prevCartItem.ticket.showingId + prevCartItem.ticket.seat !== itemID)
     })
   }
 
