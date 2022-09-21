@@ -31,11 +31,11 @@ function HeaderSlide(props: Props) {
   return (
     <div className='header-slide' style={{ backgroundImage: `url(${props.backdrop})`, backgroundPositionY: `${offset * 0.7}px` }}>
       <div className="header-overlay"></div>
-      <div className="header-text" style={{ transform: `translateY(${offset * -0.7}px)` }}>
+      <div className="header-text">
         <p className="header--subtitle">now showing</p>
         <p className="header--title">{props.title}</p>
         <p className="header--desc">{truncateDesc(props.desc, 200)}</p>
-        <Link to={`showing/${props.id}`} className='header--ticketBtn'>Get Tickets</Link>
+        <Link to={`showing/${props.showingID}`} className='header--ticketBtn'>Get Tickets</Link>
       </div>
     </div>
   )
