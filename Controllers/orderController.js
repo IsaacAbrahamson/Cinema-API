@@ -29,7 +29,11 @@ export async function placeOrder(req, res) {
         seat: ticket.seat
       }
     })
-    if (existingTicket) return res.status(400).send('Ticket already exists')
+    if (existingTicket) return res.status(400).send({
+      err: 'Ticket already exists',
+      showingId: ticket.showing,
+      seat: ticket.seat
+    })
   }
 
   // Create order

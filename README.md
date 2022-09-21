@@ -17,7 +17,24 @@ GET `/api/movie/showings?date=2022-09-06`
 
 ### ticket endpoint
 GET `/api/ticket/find?showingId=1`
-POST `/api/ticket/buy` with JSON body of { showingId, seat }
+
+### order endpoint
+
+POST `/api/order/new`
+```json
+{
+    "user": 1,
+    "cart": [
+        {
+            "showing": 3,
+            "seat": "A1"
+        },
+        {
+            "showing": 3,
+            "seat": "A2"
+        }
+    ]
+}
 ```
 
 ## Updating Database
