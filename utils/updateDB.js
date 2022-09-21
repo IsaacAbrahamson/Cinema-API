@@ -40,6 +40,15 @@ try {
     await db.sync({ lock: true, transaction })
   }
 
+  // Create test user
+  console.log('Creating test user')
+  User.create({
+    email: 'test@test.com',
+    firstname: 'test',
+    lastname: 'user',
+    password: 'test123'
+  })
+
   // Call TMDB api
   console.log('Getting latest movie data from TMDB API...')
   const showings = await getShowings()
