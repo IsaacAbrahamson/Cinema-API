@@ -11,13 +11,14 @@ Install dependencies
 ```
 npm install
 ```
-Create `.env` file
+Create `.env` file and add values for database
 ```
 TMDB_API_KEY="..."
 DB_NAME="..."
 DB_HOST="..."
 DB_USER="..."
 DB_PASS="..."
+PORT="..."
 ```
 Create database in MySQL
 ```
