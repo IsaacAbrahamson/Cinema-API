@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import Ticket from './Ticket.js'
+import TicketHistory from './TicketHistory.js'
 import db from '../utils/connectDB.js'
 
 const Order = db.define('Order', {
@@ -19,9 +19,11 @@ const Order = db.define('Order', {
     type: DataTypes.STRING,
     allowNull: false
   },
+}, {
+  timestamps: false
 })
 
-Order.hasMany(Ticket)
-Ticket.belongsTo(Order)
+Order.hasMany(TicketHistory)
+TicketHistory.belongsTo(Order)
 
 export default Order

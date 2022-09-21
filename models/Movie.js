@@ -34,6 +34,8 @@ const Movie = db.define('Movie', {
     type: DataTypes.STRING,
     allowNull: false
   }
+}, {
+  timestamps: false
 })
 
 Movie.hasMany(Showing)

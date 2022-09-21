@@ -16,21 +16,8 @@ GET `/api/movie/favorites?date=2022-09-06`
 GET `/api/movie/showings?date=2022-09-06`
 
 ### ticket endpoint
-GET `/api/ticket/all?showingId=1`
-POST `/api/ticket/reserve` with JSON body of { id, and reserve: true | false }
-POST `/api/ticket/buy` with JSON body of { id, email, name }
-```javascript
-fetch('/api/ticket/buy', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    id: 4673,
-    email: "john.doe@test.com",
-    name: "John Doe"
-  }),
-}
+GET `/api/ticket/find?showingId=1`
+POST `/api/ticket/buy` with JSON body of { showingId, seat }
 ```
 
 ## Updating Database
@@ -38,6 +25,9 @@ fetch('/api/ticket/buy', {
 Run the ./utils/updateDB.js file or just do the following script:
 ```
 npm run update
+
+# recreate all tables including users and orders
+npm run update dropall
 ```
 
 ## .env file

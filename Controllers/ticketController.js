@@ -1,8 +1,10 @@
 import Ticket from '../models/Ticket.js'
 import Showing from '../models/Showing.js'
 import Movie from '../models/Movie.js'
+import TicketHistory from '../models/TicketHistory.js'
 
-// Example: /api/ticket/all?showingId=12
+// Given a showing ID, find any purchased tickets
+// Route: /api/ticket/find?showingId=1
 export async function findTickets(req, res) {
   try {
     const tickets = await Ticket.findAll({
@@ -18,24 +20,36 @@ export async function findTickets(req, res) {
 }
 
 
-// Example: /api/ticket/reserve
-export async function reserveTicket(req, res) {
+
+// Given a showing ID and seat, create a Ticket and TicketHistory item
+// Route: /api/ticket/buy { showingId: 4, seat: "A10" }
+export async function buyTicket(req, res) {
   try {
-    // Find and update ticket
-    const ticket = await Ticket.findOne({
+    // ensure ticket doesn't exist
+    const existingTicket = await Ticket.findOne({
       where: {
-        id: req.body.id
+        showingId: req.body.showingId,
+        seat: req.body.seat
       }
     })
+    if (existingTicket) return res.status(400).send('Ticket already exists')
 
-    // Set ticket unavailable
-    ticket.available = !req.body.reserve
-    await ticket.save()
-
-    res.json({
-      id: ticket.id,
-      status: 'changed status'
+    // Update ticket
+    const ticket = Ticket.create({
+      showingId: req.body.showingId,
+      seat: req.body.seat
     })
+
+    // Save copy of ticket in TicketHistory
+    const info = await getFullMovieInfo(req.body.showingId)
+    const archivedTicket = await TicketHistory.create({
+      seat: req.body.seat,
+      name: info.movie.title,
+      poster: info.movie.poster,
+      time: info.showing.time,
+      room: info.showing.room
+    })
+    res.send({ id: archivedTicket.id })
   } catch (err) {
     console.log(err)
     res.json({ err: 'An error occured.' })
@@ -43,53 +57,19 @@ export async function reserveTicket(req, res) {
 }
 
 
-
-// Example: /api/ticket/buy
-export async function buyTicket(req, res) {
-  try {
-    // Find and update ticket
-    const ticket = await Ticket.findOne({
-      where: {
-        id: req.body.id
-      }
-    })
-
-    // Ensure ticket is available
-    if (!ticket.available) {
-      res.json({ err: 'Selected ticket is unavailable' })
-      return
+// Gets full showing and movie info given a showing ID
+async function getFullMovieInfo(showingId) {
+  const showing = await Showing.findOne({
+    where: {
+      id: showingId
     }
+  })
 
-    ticket.email = req.body.email
-    ticket.name = req.body.name
-    ticket.available = false
-    await ticket.save()
+  const movie = await Movie.findOne({
+    where: {
+      id: showing.MovieId
+    }
+  })
 
-    // Get related showing info
-    const showing = await Showing.findOne({
-      where: {
-        id: ticket.showingId
-      }
-    })
-
-    // Get related movie info
-    const movie = await Movie.findOne({
-      where: {
-        id: showing.MovieId
-      }
-    })
-
-    res.json({
-      movie: movie.title,
-      apiID: movie.apiID,
-      room: showing.room,
-      time: showing.time,
-      seat: ticket.seat_row + ticket.seat_col,
-      name: ticket.name,
-      id: ticket.id,
-    })
-  } catch (err) {
-    console.log(err)
-    res.json({ err: 'An error occured.' })
-  }
+  return { showing, movie }
 }

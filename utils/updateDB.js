@@ -9,24 +9,43 @@ import { createTimes } from '../utils/showingsAlgorithm.js'
 import Showing from '../models/Showing.js'
 import Movie from '../models/Movie.js'
 import Ticket from '../models/Ticket.js'
+import TicketHistory from '../models/TicketHistory.js'
+import Order from '../models/Order.js'
+import User from '../models/User.js'
 
 const transaction = await db.transaction()
 const startTime = new Date()
 console.log('Starting database update:')
 
+const dropAll = process.argv.slice(2)[0] === 'dropall'
+
 try {
-  console.log('Dropping Tickets, Showings, and Movies tables...')
-  await Ticket.drop({ lock: true, transaction })
-  await Showing.drop({ lock: true, transaction })
-  await Movie.drop({ lock: true, transaction })
+  // Drop/Create tables
+  if (dropAll) {
+    console.log('Re-creating all tables...')
+    await db.sync({ force: true, lock: true, transaction })
+  } else {
+    console.log('Dropping Movies, Showings, and Tickets tables...')
+    await Ticket.drop({ lock: true, transaction })
+    await Showing.drop({ lock: true, transaction })
+    await Movie.drop({ lock: true, transaction })
+    console.log('Syncing tables...')
+    await Movie.sync({ lock: true, transaction })
+    await Showing.sync({ lock: true, transaction })
+    await Ticket.sync({ lock: true, transaction })
+    await User.sync({ lock: true, transaction })
+    await Order.sync({ lock: true, transaction })
+    await TicketHistory.sync({ lock: true, transaction })
+    console.log('Syncing all table schema...')
+    await db.sync({ lock: true, transaction })
+  }
 
-  console.log('Syncing all table schema...')
-  await db.sync({ lock: true, transaction })
-
+  // Call TMDB api
   console.log('Getting latest movie data from TMDB API...')
   const showings = await getShowings()
   const favorites = await getFavorites()
 
+  // Create data in Movies and Showings tables
   console.log('Creating Movies table')
   await createMovies(favorites, true, transaction)
   await createMovies(showings, false, transaction)

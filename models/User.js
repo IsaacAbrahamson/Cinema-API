@@ -19,6 +19,8 @@ const User = db.define('User', {
     type: DataTypes.STRING,
     allowNull: false
   },
+}, {
+  timestamps: false
 })
 
 User.hasMany(Order)

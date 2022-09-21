@@ -19,6 +19,8 @@ const Showing = db.define('showing', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
+}, {
+  timestamps: false
 })
 
 Showing.hasMany(Ticket)
