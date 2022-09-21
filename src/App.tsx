@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import Showing from './components/Showing'
+import Home from './components/home/Home'
+import Showing from './components/showing/Showing'
 import Navbar from './components/Nav'
 import Footer from './components/Footer'
-import Cart from './components/Cart'
+import Cart from './components/cart/Cart'
 import './App.css'
 
 interface Cart {

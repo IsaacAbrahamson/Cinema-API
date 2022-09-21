@@ -123,7 +123,7 @@
   color: #333333;
 }
 
-.tickets--ticket.chosen {
+.tickets--ticket.active {
   background: #ffbd8c;
   color: #ffe3cf;
 }

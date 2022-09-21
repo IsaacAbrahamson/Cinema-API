@@ -1,6 +1,6 @@
 import Checkout from './Checkout'
 import { useState } from 'react'
-import { ReactComponent as Trash } from '../assets/delete.svg'
+import { ReactComponent as Trash } from '../../assets/delete.svg'
 
 interface Contact {
   name?: string,
