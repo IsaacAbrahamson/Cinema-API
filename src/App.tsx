@@ -6,20 +6,11 @@ import Navbar from './components/Nav'
 import Footer from './components/Footer'
 import Cart from './components/cart/Cart'
 import './App.css'
-
-interface Cart {
-  ticket: {
-    id: number,
-    seat_col: number,
-    seat_row: string,
-    available: boolean
-  }
-  movie: any
-}
+import { ICart, ITicket } from './types'
 
 function App() {
   const [movies, setMovies] = useState([])
-  const [cart, setCart] = useState<Cart[]>(() => {
+  const [cart, setCart] = useState<ICart[]>(() => {
     const prevCart = localStorage.getItem('cart')
     return prevCart ? JSON.parse(prevCart) : []
   })
@@ -40,7 +31,7 @@ function App() {
     setMovies(data)
   }
 
-  async function updateCart(tickets: any[]) {
+  async function updateCart(tickets: ITicket[]) {
     let newCart: any = []
 
     for (let ticket of tickets) {

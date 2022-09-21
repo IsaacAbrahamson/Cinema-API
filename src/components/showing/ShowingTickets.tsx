@@ -1,24 +1,12 @@
-import { MouseEventHandler, useState } from "react"
+import { ICart, ITicket } from '../../types'
 
 interface Props {
-  tickets: Ticket[],
-  chooseTicket: (ticket: Ticket) => void
-}
-
-// Reserved tickets are tickets that are stored in the database
-// Active tickets are currently in the cart
-// Chosen tickets are selected but not added to cart
-interface Ticket {
-  showingId: number,
-  seat: string,
-  reserved: boolean,
-  active: boolean,
-  chosen: boolean
-  id?: number,
+  tickets: ITicket[],
+  chooseTicket: (ticket: ITicket) => void
 }
 
 function ShowingTickets(props: Props) {
-  const ticketElems = props.tickets.map((ticket: Ticket) => {
+  const ticketElems = props.tickets.map((ticket: ITicket) => {
     let classname = 'tickets--ticket'
     if (ticket.reserved) {
       classname += ' reserved'

@@ -4,23 +4,12 @@ import ShowingInfo from './ShowingInfo'
 import ShowingTickets from './ShowingTickets'
 import TicketCount from './TicketCount'
 import { ReactComponent as Back } from '../../assets/back.svg'
+import { ICart, ITicket } from '../../types'
 import './ShowingStyles.css'
 
 interface Props {
-  cart: any,
-  updateCart: any
-}
-
-// Reserved tickets are tickets that are stored in the database
-// Active tickets are currently in the cart
-// Chosen tickets are selected but not added to cart
-interface Ticket {
-  showingId: number,
-  seat: string,
-  reserved: boolean,
-  active: boolean,
-  chosen: boolean
-  id?: number,
+  cart: ICart[],
+  updateCart: (tickets: ITicket[]) => void
 }
 
 function Showing(props: Props) {
@@ -32,7 +21,7 @@ function Showing(props: Props) {
   const showingId: number = Number(params.id)
 
   // Initialize tickets state with dummy tickets
-  const [tickets, setTickets] = useState<Ticket[]>(createEmptyTickets())
+  const [tickets, setTickets] = useState<ITicket[]>(createEmptyTickets())
   const [showing, setShowing] = useState<{ [key: string]: any }>({})
 
 
@@ -43,11 +32,11 @@ function Showing(props: Props) {
   async function callAPI() {
     // Get any tickets that exist for the showing
     let ticketRes = await fetch(`/api/ticket/find?showingId=${showingId}`)
-    let ticketData: Ticket[] = await ticketRes.json()
+    let ticketData: ITicket[] = await ticketRes.json()
 
     // Update any tickets that come in from api to be reserved in state
     setTickets(prevTickets => {
-      let newTickets: Ticket[] = [...prevTickets]
+      let newTickets: ITicket[] = [...prevTickets]
       for (let ticket of ticketData) {
         // find where ticket is in tickets array
         const existing: number = newTickets.findIndex(e => e.seat === ticket.seat)
@@ -64,7 +53,7 @@ function Showing(props: Props) {
   }
 
 
-  function chooseTicket(ticket: Ticket) {
+  function chooseTicket(ticket: ITicket) {
     setTickets(prevTickets => prevTickets.map(prevTicket => {
       // Do not update reserved seats
       if (ticket.reserved) return { ...prevTicket }
@@ -78,10 +67,10 @@ function Showing(props: Props) {
 
 
   // Creates an array of ticket objects for state
-  function createEmptyTickets(): Ticket[] {
+  function createEmptyTickets(): ITicket[] {
     const rows: number = 10
     const cols: number = 16
-    let seats: Ticket[] = []
+    let seats: ITicket[] = []
 
     for (let row = 1; row <= rows; row++) {
       for (let col = 1; col <= cols; col++) {

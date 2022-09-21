@@ -1,4 +1,11 @@
-function TicketCount(props: any) {
+import { ICart, ITicket } from '../../types'
+
+interface Props {
+  tickets: ITicket[],
+  updateCart: (tickets: ITicket[]) => void
+}
+
+function TicketCount(props: Props) {
   const chosenTickets = props.tickets.filter((ticket: any) => ticket.chosen)
   const ids = chosenTickets.map((e: any) => e.id)
 
