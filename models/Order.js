@@ -2,26 +2,26 @@ import { DataTypes } from 'sequelize'
 import Ticket from './Ticket.js'
 import db from '../utils/connectDB.js'
 
-const Showing = db.define('showing', {
-  date: {
+const Order = db.define('Order', {
+  email: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  time: {
+  firstname: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  room: {
+  lastname: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  apiID: {
-    type: DataTypes.INTEGER,
+  password: {
+    type: DataTypes.STRING,
     allowNull: false
   },
 })
 
-Showing.hasMany(Ticket)
-Ticket.belongsTo(Showing)
+Order.hasMany(Ticket)
+Ticket.belongsTo(Order)
 
-export default Showing
+export default Order

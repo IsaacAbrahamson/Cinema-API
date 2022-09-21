@@ -26,13 +26,16 @@ export async function getShowings() {
   const response = await fetch('https://api.themoviedb.org/3/discover/movie?' + options)
   const data = await response.json()
 
-  for (let video of data.results) {
+  const limit = 7
+  const limitedResults = data.results.slice(0, limit)
+
+  for (let video of limitedResults) {
     video.trailer = await getTrailer(video.id)
     video.backdrop = 'https://image.tmdb.org/t/p/original' + video.backdrop_path
-    video.poster = 'https://image.tmdb.org/t/p/w500' + video.poster_path
+    video.poster = 'https://image.tmdb.org/t/p/original' + video.poster_path
   }
 
-  return data.results
+  return limitedResults
 }
 
 

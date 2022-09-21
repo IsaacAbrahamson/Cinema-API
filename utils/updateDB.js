@@ -1,43 +1,51 @@
-// Updates database with latest information from TMDB api
-// Called every week using CRON script
+// Get database connection
 import db from './connectDB.js'
+
+// Helper utilities to call TMDB api and determine available rooms and showtimes
+import { getShowings, getFavorites } from './tmdb.js'
+import { createTimes } from '../utils/showingsAlgorithm.js'
+
+// Get database models
 import Showing from '../models/Showing.js'
 import Movie from '../models/Movie.js'
 import Ticket from '../models/Ticket.js'
-import { getShowings, getFavorites } from './tmdb.js'
-import { createTimes, createSeats } from '../utils/showingsAlgorithm.js'
 
 const transaction = await db.transaction()
 const startTime = new Date()
-console.log('Starting database update...')
+console.log('Starting database update:')
 
 try {
-  // Drop current tables
-  await db.sync({ force: true, lock: true, transaction })
+  console.log('Dropping Tickets, Showings, and Movies tables...')
+  await Ticket.drop({ lock: true, transaction })
+  await Showing.drop({ lock: true, transaction })
+  await Movie.drop({ lock: true, transaction })
 
-  // Query TMDB api to get currently playing movies
+  console.log('Syncing all table schema...')
+  await db.sync({ lock: true, transaction })
+
+  console.log('Getting latest movie data from TMDB API...')
   const showings = await getShowings()
   const favorites = await getFavorites()
 
-  // Add movies table to database
+  console.log('Creating Movies table')
   await createMovies(favorites, true, transaction)
   await createMovies(showings, false, transaction)
 
-  // Add showings table to database for 7 days
-  const times = createTimes(favorites, showings, 7)
-  for (let i = 0; i < times.length; i++) {
-    await createShowings(times[i])
-  }
+  // times is array of 7 days worth of times
+  const weekTimes = createTimes(favorites, showings, 7)
+  // for every day create showings for that days times
+  console.log('Creating Showings table')
+  await Promise.all(weekTimes.map(day => createShowings(day)))
 
-  // Create foriegn keys
+  console.log('Creating foreign keys for Showings table')
   await createAssociations()
 
   await transaction.commit()
   await db.close()
 
   const endTime = new Date()
-  const duration = ((endTime.getTime() - startTime.getTime()) / 1000 / 60).toFixed(2)
-  console.log(`Database update complete! Total run time: ${duration} minutes.`)
+  const duration = ((endTime.getTime() - startTime.getTime()) / 1000).toFixed(2)
+  console.log(`Database update complete! Total run time: ${duration} seconds.`)
 } catch (err) {
   console.log(err)
   await transaction.rollback()
@@ -45,54 +53,8 @@ try {
   await db.close()
 }
 
-async function createAssociations() {
-  const movies = await Movie.findAll()
 
-  for (let movie of movies) {
-    const showings = await Showing.findAll({
-      where: {
-        apiID: movie.apiID
-      }
-    })
-
-    movie.addShowings(showings)
-  }
-}
-
-
-function createShowings(times) {
-  return Promise.all(times.map(result => {
-    return new Promise(async (resolve, reject) => {
-
-      try {
-        const showing = await Showing.create({
-          date: result.time.slice(0, 10),
-          time: result.time,
-          room: result.name,
-          apiID: result.apiID,
-        }, { lock: true, transaction })
-
-        const seats = createSeats()
-        for (let seat of seats) {
-          const ticket = await Ticket.create({
-            seat_row: seat[0],
-            seat_col: seat[1],
-            available: true,
-          }, { lock: true, transaction })
-          showing.addTicket(ticket)
-        }
-
-        resolve(showing)
-      } catch (err) {
-        reject(err)
-      }
-
-    })
-  }))
-}
-
-
-// TODO: Bulk create?
+// Create the database movies table from an array of movie api information
 function createMovies(results, favorite, transaction) {
   return Promise.all(results.map(result => {
     return new Promise(async (resolve, reject) => {
@@ -115,4 +77,42 @@ function createMovies(results, favorite, transaction) {
 
     })
   }))
+}
+
+
+// Create showings based on a list of available room times
+function createShowings(times) {
+  return Promise.all(times.map(result => {
+    return new Promise(async (resolve, reject) => {
+
+      try {
+        const showing = await Showing.create({
+          date: result.time.slice(0, 10),
+          time: result.time,
+          room: result.name,
+          apiID: result.apiID,
+        }, { lock: true, transaction })
+        resolve(showing)
+      } catch (err) {
+        reject(err)
+      }
+
+    })
+  }))
+}
+
+
+// Add all of the showings to their related movie
+async function createAssociations() {
+  const movies = await Movie.findAll()
+
+  for (let movie of movies) {
+    const showings = await Showing.findAll({
+      where: {
+        apiID: movie.apiID
+      }
+    })
+
+    movie.addShowings(showings)
+  }
 }
