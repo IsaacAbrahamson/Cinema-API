@@ -1,25 +1,6 @@
 // Algorithm used to schedule showing times given list of available theaters, times, and movies
 import { regRooms } from '../config/theaters.js'
 
-// Returns two-dimensional array of seats wth row and col
-// [[x,y],[x,y],[x,y],[x,y]]
-// export function createSeats() {
-//   // Hardcoded defaults for theater
-//   // Potentially add possibly to configure in ./config/theaters.js
-//   const rows = 10
-//   const cols = 16
-//   let seats = []
-
-//   for (let row = 1; row <= rows; row++) {
-//     for (let col = 1; col <= cols; col++) {
-//       let letter = String.fromCharCode(row + 64)
-//       seats.push([letter, col])
-//     }
-//   }
-
-//   return seats
-// }
-
 // Creates times for favorite and showing movies for x number of days
 export function createTimes(favorites, showings, days) {
   let output = []
