@@ -1,6 +1,18 @@
+import { useState } from 'react'
 import OrderSummary from './OrderSummary'
+import { ICart, ITicket } from '../../types'
 
-function Checkout(props: any) {
+interface Props {
+  cart: ICart[]
+}
+
+function Checkout(props: Props) {
+  const [user, setUser] = useState({})
+
+  function handleCheckout(): void {
+    console.log('checkout')
+  }
+
   return (
     <div className="checkout">
       <h2 className="checkout-title">Order Summary:</h2>
@@ -34,7 +46,7 @@ function Checkout(props: any) {
           </label>
         </div>
 
-        <div className="checkout-btn">checkout</div>
+        <div className="checkout-btn" onClick={handleCheckout}>checkout</div>
       </div>
     </div>
   )

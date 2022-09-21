@@ -1,7 +1,6 @@
 import Checkout from './Checkout'
 import { ReactComponent as Trash } from '../../assets/delete.svg'
 import { ICart, ITicket } from '../../types'
-import { ReactElement } from 'react-imask/dist/mixin'
 
 interface Props {
   cart: ICart[],
