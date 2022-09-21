@@ -31,6 +31,10 @@ function App() {
     setMovies(data)
   }
 
+  async function clearCart(): Promise<void> {
+    setCart([])
+  }
+
   async function updateCart(tickets: ITicket[]): Promise<void> {
     let newCart: any = []
 
@@ -66,7 +70,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/showing/:id" element={<Showing cart={cart} updateCart={updateCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} />} />
+          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} clearCart={clearCart} />} />
         </Routes>
       </div>
       <Footer />

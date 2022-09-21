@@ -3,14 +3,40 @@ import OrderSummary from './OrderSummary'
 import { ICart, ITicket } from '../../types'
 
 interface Props {
-  cart: ICart[]
+  cart: ICart[],
+  clearCart: () => void,
+  removeCartItem: (showingId: number, seat: string) => void
 }
 
 function Checkout(props: Props) {
-  const [user, setUser] = useState({})
+  async function handleCheckout(): Promise<void> {
+    // get needed data from cart
+    const reqBody = {
+      user: 1,
+      cart: props.cart.map(e => ({ showing: e.ticket.showingId, seat: e.ticket.seat }))
+    }
 
-  function handleCheckout(): void {
-    console.log('checkout')
+    // Place order
+    const res = await fetch('/api/order/new', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reqBody)
+    })
+    const data = await res.json()
+
+    // Check for duplicate ticket
+    if (data.err) {
+      alert(`Your ticket "${data.seat}" has been recently reserved by another guest.`)
+      props.removeCartItem(data.showingId, data.seat)
+      return
+    }
+
+    // Order successful, alert user and clear cart
+    alert(`Successfully placed order #${data.order}`)
+    props.clearCart()
   }
 
   return (
@@ -19,30 +45,20 @@ function Checkout(props: Props) {
       <OrderSummary count={props.cart.length} />
 
       <div className='checkout-form'>
-        <h2 className="checkout-title">Personal Information:</h2>
-        <label className='checkout--label'>
-          Name:
-          <input type="text" name="name" placeholder='Full Name' />
-        </label>
-        <label className='checkout--label'>
-          Email:
-          <input type="text" name="email" placeholder='john.doe@gmail.com' />
-        </label>
-
         <h2 className="checkout-title">Payment Details:</h2>
         <p className='checkout--warning'><span>Note:</span> Payment section is for appearance only, no payment details are collected.</p>
         <label className='checkout--label'>
           Card Number:
-          <input type="text" name="cardNumber" placeholder='9999-9999-9999-9999' />
+          <input type="text" name="cardNumber" value='1234-1234-1234-1234' disabled />
         </label>
         <div className="form-group">
           <label className='checkout--label'>
             Security Code:
-            <input type="text" name="secCode" placeholder='***' />
+            <input type="text" name="secCode" value='***' disabled />
           </label>
           <label className='checkout--label'>
             Expiration Date:
-            <input type="text" name="expDate" placeholder='MM/YY' />
+            <input type="text" name="expDate" value='12/22' disabled />
           </label>
         </div>
 

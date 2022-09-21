@@ -4,8 +4,9 @@ import { ICart, ITicket } from '../../types'
 
 interface Props {
   cart: ICart[],
-  updateCart: (tickets: ITicket[]) => void
-  removeCartItem: (showingId: number, seat: string) => void
+  updateCart: (tickets: ITicket[]) => void,
+  removeCartItem: (showingId: number, seat: string) => void,
+  clearCart: () => void
 }
 
 function Cart(props: Props) {
@@ -41,7 +42,7 @@ function Cart(props: Props) {
         {props.cart.length > 0 && cartElems}
       </div>
 
-      {props.cart.length > 0 && <Checkout cart={props.cart} />}
+      {props.cart.length > 0 && <Checkout cart={props.cart} clearCart={props.clearCart} removeCartItem={props.removeCartItem} />}
 
     </div >
   )
