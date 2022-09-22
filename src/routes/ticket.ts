@@ -1,5 +1,5 @@
 import express from 'express'
-import Ticket from '../models/Ticket'
+import Ticket from '../models/Ticket.js'
 const router = express.Router()
 
 // Given a showing ID, find any purchased tickets
@@ -8,7 +8,7 @@ router.get('/find', async (req, res) => {
   try {
     const tickets = await Ticket.findAll({
       where: {
-        showingId: req.query.showingId
+        showingId: Number(req.query.showingId)
       }
     })
     res.json(tickets)

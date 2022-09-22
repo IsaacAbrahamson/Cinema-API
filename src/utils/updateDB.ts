@@ -1,23 +1,23 @@
 // Get database connection
 import db from './connectDB.js'
-
 // Helper utilities to call TMDB api and determine available rooms and showtimes
-import { getShowings, getFavorites } from './tmdb'
-import { createTimes } from './showingsAlgorithm'
-
+import { getShowings, getFavorites } from './tmdb.js'
+import { createTimes } from './showingsAlgorithm.js'
 // Get database models
-import Showing from '../models/Showing'
-import Movie from '../models/Movie'
-import Ticket from '../models/Ticket'
-import TicketHistory from '../models/TicketHistory'
-import Order from '../models/Order'
-import User from '../models/User'
+import Showing from '../models/Showing.js'
+import Movie from '../models/Movie.js'
+import Ticket from '../models/Ticket.js'
+import TicketHistory from '../models/TicketHistory.js'
+import Order from '../models/Order.js'
+import User from '../models/User.js'
+// Get types
+import Transaction from 'sequelize/types/transaction.js'
 
-const transaction = await db.transaction()
-const startTime = new Date()
+const transaction: Transaction = await db.transaction()
+const startTime: Date = new Date()
 console.log('Starting database update:')
 
-const dropAll = process.argv.slice(2)[0] === 'dropall'
+const dropAll: boolean = process.argv.slice(2)[0] === 'dropall'
 
 try {
   // Drop/Create tables
@@ -60,15 +60,18 @@ try {
   await createMovies(showings, false, transaction)
 
   // times is array of 7 days worth of times
-  const weekTimes = createTimes(favorites, showings, 7)
+  const weekTimes = createTimes(showings, 7)
   // for every day create showings for that days times
   console.log('Creating Showings table')
   await Promise.all(weekTimes.map(day => createShowings(day)))
 
+  // Commit transaction otherwise cant find associations
+  await transaction.commit()
+
+  // Create associations
   console.log('Creating foreign keys for Showings table')
   await createAssociations()
 
-  await transaction.commit()
   await db.close()
 
   const endTime = new Date()
@@ -141,6 +144,6 @@ async function createAssociations() {
       }
     })
 
-    movie.addShowings(showings)
+    await movie.addShowings(showings)
   }
 }

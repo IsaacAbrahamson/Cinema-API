@@ -37,7 +37,7 @@ export async function placeOrder(req: any, res: any) {
   }
 
   // Create order
-  const order: any = await Order.create({ date: Date.now().toString(), UserId: req.body.user })
+  const order: any = await Order.create({ date: Date.now().toString(), userId: req.body.user })
   // Create tickets and associate them with order
   for (let ticket of req.body.cart) {
     await buyTicket(order.id, ticket.showing, ticket.seat)
@@ -49,7 +49,7 @@ export async function placeOrder(req: any, res: any) {
 
 
 // Given an order, showing, and seat create the Ticket and TicketHistory items for that order
-async function buyTicket(OrderId: any, showingId: any, seat: any) {
+async function buyTicket(orderId: any, showingId: any, seat: any) {
   // Create ticket
   Ticket.create({ showingId, seat })
 
@@ -61,7 +61,7 @@ async function buyTicket(OrderId: any, showingId: any, seat: any) {
     time: info.showing.time,
     room: info.showing.room,
     seat,
-    OrderId
+    orderId
   })
   return archivedTicket.id
 }

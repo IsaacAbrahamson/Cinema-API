@@ -1,19 +1,43 @@
-import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize'
-import sequelize from '../utils/connectDB'
-import Showing from './Showing'
+import {
+  Association, DataTypes, HasManyAddAssociationMixin, HasManyCountAssociationsMixin,
+  HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManyHasAssociationMixin,
+  HasManySetAssociationsMixin, HasManyAddAssociationsMixin, HasManyHasAssociationsMixin,
+  HasManyRemoveAssociationMixin, HasManyRemoveAssociationsMixin, Model, InferAttributes,
+  InferCreationAttributes, CreationOptional
+} from 'sequelize'
+import sequelize from '../utils/connectDB.js'
+import Showing from './Showing.js'
 
 class Movie extends Model<InferAttributes<Movie>, InferCreationAttributes<Movie>> {
-  declare favorite: CreationOptional<boolean>
+  declare id: CreationOptional<number>
+  declare favorite: boolean | null
   declare apiID: number
   declare title: string
   declare overview: string
   declare release: string
-  declare trailer: CreationOptional<string>
+  declare trailer: string | null
   declare backdrop: string
   declare poster: string
+
+  // Association methods
+  declare getShowings: HasManyGetAssociationsMixin<Showing>
+  declare addShowing: HasManyAddAssociationMixin<Showing, number>
+  declare addShowings: HasManyAddAssociationsMixin<Showing, number>
+  declare setShowings: HasManySetAssociationsMixin<Showing, number>
+  declare removeShowing: HasManyRemoveAssociationMixin<Showing, number>
+  declare removeShowings: HasManyRemoveAssociationsMixin<Showing, number>
+  declare hasShowing: HasManyHasAssociationMixin<Showing, number>
+  declare hasShowings: HasManyHasAssociationsMixin<Showing, number>
+  declare countShowings: HasManyCountAssociationsMixin
+  declare createShowing: HasManyCreateAssociationMixin<Showing, 'movieId'>
 }
 
 Movie.init({
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    autoIncrement: true,
+    primaryKey: true
+  },
   favorite: {
     type: DataTypes.BOOLEAN,
     allowNull: true
@@ -51,7 +75,7 @@ Movie.init({
   timestamps: false
 })
 
-Movie.hasMany(Showing)
-Showing.belongsTo(Movie)
+Movie.hasMany(Showing, { foreignKey: 'movieId' })
+Showing.belongsTo(Movie, { foreignKey: 'movieId' })
 
 export default Movie

@@ -1,8 +1,8 @@
 // Algorithm used to schedule showing times given list of available theaters, times, and movies
-import { regRooms } from '../config/theaters'
+import { regRooms } from '../config/theaters.js'
 
 // Creates times for favorite and showing movies for x number of days
-export function createTimes(favorites: any, showings: any, days: any) {
+export function createTimes(showings: any, days: any) {
   let output = []
 
   for (let day = 0; day < days; day++) {

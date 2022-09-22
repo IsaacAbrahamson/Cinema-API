@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/app.js",
-    "update": "node dist/utils/updateDB.js",
+    "update": "tsc -p . && node dist/utils/updateDB.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p ."
   },
