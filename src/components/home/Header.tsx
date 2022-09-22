@@ -26,7 +26,7 @@ function Header(props: Props) {
           title={props.movies[i].title}
           desc={props.movies[i].overview}
           backdrop={props.movies[i].backdrop}
-          showingID={props.movies[i].showings[0].id}
+          showingID={props.movies[i].Showings[0].id}
         />
       </SwiperSlide>
     )

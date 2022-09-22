@@ -30,7 +30,7 @@ export interface IMovie {
   trailer: string
   backdrop: string
   poster: string
-  showings: IShowing[]
+  Showings: IShowing[]
 }
 
 export interface ICart {

@@ -42,7 +42,7 @@ function Showings() {
             desc={item.overview}
             poster={item.poster}
             backdrop={item.backdrop}
-            showings={item.showings}
+            showings={item.Showings}
             date={chosenDate}
           />
         )
