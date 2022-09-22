@@ -1,4 +1,8 @@
-function OrderSummary(props: any) {
+interface Props {
+  count: number
+}
+
+function OrderSummary(props: Props) {
   let cost: number = 12.99
   const subtotal: number = Number((props.count * cost).toFixed(2))
   const tax: number = Number((subtotal * 0.07).toFixed(2))

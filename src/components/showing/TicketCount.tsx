@@ -6,8 +6,8 @@ interface Props {
 }
 
 function TicketCount(props: Props) {
-  const chosenTickets = props.tickets.filter((ticket: ITicket) => ticket.chosen)
-  const ids = chosenTickets.map((e: any) => e.id)
+  const chosenTickets: ITicket[] = props.tickets.filter((ticket: ITicket) => ticket.chosen)
+  const ids: number[] = chosenTickets.map((e: ITicket) => e.id)
 
   return (
     <div className="ticket-count">

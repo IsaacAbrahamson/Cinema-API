@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom"
+import { IShowing } from '../../types'
 
 interface Props {
-  id: number,
-  title: string,
-  desc: string,
-  poster: string,
-  backdrop: string,
-  showings: { id: number, time: string }[],
+  id: number
+  title: string
+  desc: string
+  poster: string
+  backdrop: string
   date: string
+  showings: IShowing[]
 }
 
 function ShowingItem(props: Props) {

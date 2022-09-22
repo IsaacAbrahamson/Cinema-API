@@ -2,15 +2,38 @@
 // Active tickets are currently in the cart
 // Chosen tickets are selected but not added to cart
 export interface ITicket {
-  showingId: number,
-  seat: string,
-  reserved: boolean,
-  active: boolean,
+  showingId: number
+  seat: string
+  reserved: boolean
+  active: boolean
   chosen: boolean
-  id?: number,
+  id: number
+}
+
+export interface IShowing {
+  id: number
+  MovieId: number
+  apiID: number
+  date: string
+  room: string
+  time: string
+  Movie: IMovie
+}
+
+export interface IMovie {
+  id: number
+  apiID: number
+  favorite: boolean
+  release: string
+  title: string
+  overview: string
+  trailer: string
+  backdrop: string
+  poster: string
+  showings: IShowing[]
 }
 
 export interface ICart {
   ticket: ITicket
-  movie: any
+  showing: IShowing
 }

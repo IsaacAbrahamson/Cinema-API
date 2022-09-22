@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import Header from './Header'
 import Showings from './Showings'
+import { IMovie } from '../../types'
 import './HomeStyles.css'
 
 function Home() {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState<IMovie[]>([])
 
   useEffect(() => {
     fetchMovies()
@@ -12,7 +13,7 @@ function Home() {
 
   async function fetchMovies() {
     const res = await fetch('/api/movie/all')
-    const data = await res.json()
+    const data: IMovie[] = await res.json()
     setMovies(data)
   }
 

@@ -2,20 +2,15 @@ import HeaderSlide from "./HeaderSlide"
 
 // Swiper Components and Styles
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper'
+import { IMovie } from '../../types'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
 interface Props {
-  movies: {
-    id: number,
-    title: string,
-    overview: string,
-    backdrop: string,
-    showings: any
-  }[]
+  movies: IMovie[]
 }
 
 function Header(props: Props) {

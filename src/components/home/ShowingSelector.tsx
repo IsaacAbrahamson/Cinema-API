@@ -1,16 +1,21 @@
 import { useState } from 'react'
 import ShowingSelectorDay from './ShowingSelectorDay'
 
+interface Props {
+  date: string
+  updateDate: (date: string) => void
+}
+
 interface Day {
   id: number,
   name: string
   date: string
 }
 
-function ShowingSelector(props: any) {
-  const [activeDay, setActiveDay] = useState(0)
+function ShowingSelector(props: Props) {
+  const [activeDay, setActiveDay] = useState<number>(0)
 
-  function updateDay(id: number, date: string) {
+  function updateDay(id: number, date: string): void {
     setActiveDay(id)
     props.updateDate(date)
   }
@@ -32,7 +37,7 @@ function ShowingSelector(props: any) {
   days[0].name = 'Today'
 
   // Add leading 0 to date if needed
-  function padDate(date: number) {
+  function padDate(date: number): string {
     return ('0' + date).slice(-2)
   }
 

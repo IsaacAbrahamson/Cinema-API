@@ -1,7 +1,7 @@
 interface Props {
   id: number
   active: boolean
-  handleClick: any
+  handleClick: (id: number, date: string) => void
   name: string
   date: string
 }

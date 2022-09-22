@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom"
 import Logo from '../assets/Logo.png'
+import { ICart, ITicket } from '../types'
 import { ReactComponent as Cart } from '../assets/cart.svg'
 
-function Navbar(props: any) {
+interface Props {
+  cart: ICart[]
+  updateCart: (tickets: ITicket[]) => Promise<void>
+}
+
+function Navbar(props: Props) {
   return (
     <nav>
       <Link to='/'>

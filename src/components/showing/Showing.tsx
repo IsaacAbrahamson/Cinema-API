@@ -4,7 +4,7 @@ import ShowingInfo from './ShowingInfo'
 import ShowingTickets from './ShowingTickets'
 import TicketCount from './TicketCount'
 import { ReactComponent as Back } from '../../assets/back.svg'
-import { ICart, ITicket } from '../../types'
+import { ICart, ITicket, IShowing } from '../../types'
 import './ShowingStyles.css'
 
 interface Props {
@@ -22,7 +22,7 @@ function Showing(props: Props) {
 
   // Initialize tickets state with dummy tickets
   const [tickets, setTickets] = useState<ITicket[]>(createEmptyTickets())
-  const [showing, setShowing] = useState<{ [key: string]: any }>({})
+  const [showing, setShowing] = useState<IShowing | {}>({})
 
 
   // Keep tickets state up-to-date with cart
@@ -109,10 +109,16 @@ function Showing(props: Props) {
   }
 
 
+  // User Defined Type Guard for showing
+  function instanceOfShowing(obj: IShowing | {}): obj is IShowing {
+    return 'Movie' in obj;
+  }
+
+
   return (
     <div className='showing-container'>
       <div className='back-btn' onClick={() => navigate(-1)}><Back />Go Back</div>
-      {showing.Movie && <ShowingInfo
+      {instanceOfShowing(showing) && <ShowingInfo
         id={showing.id}
         time={showing.time}
         room={showing.room}

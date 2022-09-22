@@ -5,8 +5,8 @@ import Showing from './components/showing/Showing'
 import Navbar from './components/Nav'
 import Footer from './components/Footer'
 import Cart from './components/cart/Cart'
+import { ICart, ITicket, IShowing } from './types'
 import './App.css'
-import { ICart, ITicket } from './types'
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -36,7 +36,7 @@ function App() {
   }
 
   async function updateCart(tickets: ITicket[]): Promise<void> {
-    let newCart: any = []
+    let newCart: ICart[] = []
 
     for (let ticket of tickets) {
       // set ticket as active
@@ -45,8 +45,8 @@ function App() {
 
       // update cart with ticket and movie information
       const res = await fetch(`/api/movie/searchShowing?id=${ticket.showingId}`)
-      const [movie] = await res.json()
-      newCart.push({ ticket, movie })
+      const [showing]: IShowing[] = await res.json()
+      newCart.push({ ticket, showing })
     }
 
     setCart(prev => {
