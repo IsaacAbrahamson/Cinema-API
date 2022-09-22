@@ -1,8 +1,15 @@
-import { DataTypes } from 'sequelize'
+import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
 import Ticket from './Ticket.js'
-import db from '../utils/connectDB'
 
-const Showing = db.define('showing', {
+class Showing extends Model<InferAttributes<Showing>, InferCreationAttributes<Showing>> {
+  declare date: string
+  declare time: string
+  declare room: string
+  declare apiID: string
+}
+
+Showing.init({
   date: {
     type: DataTypes.STRING,
     allowNull: false
@@ -20,6 +27,7 @@ const Showing = db.define('showing', {
     allowNull: false
   },
 }, {
+  sequelize,
   timestamps: false
 })
 

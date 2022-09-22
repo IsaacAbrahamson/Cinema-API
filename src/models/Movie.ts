@@ -1,10 +1,22 @@
-import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB'
+import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
 import Showing from './Showing'
 
-const Movie = db.define('Movie', {
+class Movie extends Model<InferAttributes<Movie>, InferCreationAttributes<Movie>> {
+  declare favorite: CreationOptional<boolean>
+  declare apiID: number
+  declare title: string
+  declare overview: string
+  declare release: string
+  declare trailer: CreationOptional<string>
+  declare backdrop: string
+  declare poster: string
+}
+
+Movie.init({
   favorite: {
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    allowNull: true
   },
   apiID: {
     type: DataTypes.INTEGER,
@@ -35,6 +47,7 @@ const Movie = db.define('Movie', {
     allowNull: false
   }
 }, {
+  sequelize,
   timestamps: false
 })
 

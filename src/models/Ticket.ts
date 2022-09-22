@@ -1,11 +1,16 @@
-import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB'
+import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
 
-const Ticket = db.define('Ticket', {
+class Ticket extends Model<InferAttributes<Ticket>, InferCreationAttributes<Ticket>> {
+  declare seat: string
+}
+
+Ticket.init({
   seat: {
     type: DataTypes.STRING,
   }
 }, {
+  sequelize,
   timestamps: false
 })
 

@@ -1,14 +1,19 @@
-import { DataTypes } from 'sequelize'
+import { Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
 import TicketHistory from './TicketHistory'
 import User from './User'
-import db from '../utils/connectDB'
 
-const Order = db.define('Order', {
+class Order extends Model<InferAttributes<Order>, InferCreationAttributes<Order>> {
+  declare date: string
+}
+
+Order.init({
   date: {
     type: DataTypes.STRING,
     allowNull: false
   }
 }, {
+  sequelize,
   timestamps: false
 })
 

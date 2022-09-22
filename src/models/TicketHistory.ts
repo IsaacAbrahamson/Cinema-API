@@ -1,9 +1,17 @@
-import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB'
+import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
+
+class TicketHistory extends Model<InferAttributes<TicketHistory>, InferCreationAttributes<TicketHistory>> {
+  declare name: string
+  declare time: string
+  declare poster: string
+  declare room: string
+  declare seat: string
+}
 
 // TicketHistory persists all of the related ticket data after checkout because
 // Tickets, Movies, and Showings tables are all reset on every API update run
-const TicketHistory = db.define('TicketHistory', {
+TicketHistory.init({
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -25,6 +33,7 @@ const TicketHistory = db.define('TicketHistory', {
     allowNull: false
   },
 }, {
+  sequelize,
   timestamps: false
 })
 

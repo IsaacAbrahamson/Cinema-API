@@ -2,16 +2,16 @@
 import db from './connectDB.js'
 
 // Helper utilities to call TMDB api and determine available rooms and showtimes
-import { getShowings, getFavorites } from './tmdb.js'
-import { createTimes } from './showingsAlgorithm.js'
+import { getShowings, getFavorites } from './tmdb'
+import { createTimes } from './showingsAlgorithm'
 
 // Get database models
-import Showing from '../models/Showing.js'
-import Movie from '../models/Movie.js'
-import Ticket from '../models/Ticket.js'
-import TicketHistory from '../models/TicketHistory.js'
-import Order from '../models/Order.js'
-import User from '../models/User.js'
+import Showing from '../models/Showing'
+import Movie from '../models/Movie'
+import Ticket from '../models/Ticket'
+import TicketHistory from '../models/TicketHistory'
+import Order from '../models/Order'
+import User from '../models/User'
 
 const transaction = await db.transaction()
 const startTime = new Date()

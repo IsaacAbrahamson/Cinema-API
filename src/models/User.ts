@@ -1,7 +1,14 @@
-import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB'
+import { Model, InferAttributes, InferCreationAttributes, DataTypes } from 'sequelize'
+import sequelize from '../utils/connectDB'
 
-const User = db.define('User', {
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+  declare email: string
+  declare firstname: string
+  declare lastname: string
+  declare password: string
+}
+
+User.init({
   email: {
     type: DataTypes.STRING,
     allowNull: false
@@ -19,6 +26,7 @@ const User = db.define('User', {
     allowNull: false
   },
 }, {
+  sequelize,
   timestamps: false
 })
 
