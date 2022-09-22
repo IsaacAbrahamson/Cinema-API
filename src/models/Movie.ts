@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB.js'
-import Showing from './Showing.js'
+import db from '../utils/connectDB'
+import Showing from './Showing'
 
 const Movie = db.define('Movie', {
   favorite: {

@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import db from '../utils/connectDB.js'
+import db from '../utils/connectDB'
 
 // TicketHistory persists all of the related ticket data after checkout because
 // Tickets, Movies, and Showings tables are all reset on every API update run

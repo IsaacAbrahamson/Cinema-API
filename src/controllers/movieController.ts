@@ -3,7 +3,7 @@ import Showing from '../models/Showing.js'
 
 // Finds movie information based on movie id
 // Example: /api/searchMovie?id=1
-export async function searchMovie(req, res) {
+export async function searchMovie(req: any, res: any) {
   try {
     const movies = await Movie.findAll({
       where: {
@@ -20,7 +20,7 @@ export async function searchMovie(req, res) {
 
 // Finds movie information based on showing id
 // Example: /api/searchShowing?id=1
-export async function searchShowing(req, res) {
+export async function searchShowing(req: any, res: any) {
   try {
     const showings = await Showing.findAll({
       where: {
@@ -36,7 +36,7 @@ export async function searchShowing(req, res) {
 }
 
 // Example: /api/movie/all
-export async function findAll(req, res) {
+export async function findAll(req: any, res: any) {
   try {
     const movies = await Movie.findAll({ include: Showing })
     res.json(movies)
@@ -47,7 +47,7 @@ export async function findAll(req, res) {
 }
 
 // Example: /api/movie/favorites?date=2022-09-06
-export async function findFavorites(req, res) {
+export async function findFavorites(req: any, res: any) {
   try {
     const movies = await Movie.findAll({
       where: {
@@ -68,7 +68,7 @@ export async function findFavorites(req, res) {
 }
 
 // Example: /api/movie/showings?date=2022-09-06
-export async function findShowings(req, res) {
+export async function findShowings(req: any, res: any) {
   try {
     const movies = await Movie.findAll({
       where: {

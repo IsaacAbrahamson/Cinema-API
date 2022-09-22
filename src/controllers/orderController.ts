@@ -20,7 +20,7 @@ POST /api/order/new
     ]
 }
 */
-export async function placeOrder(req, res) {
+export async function placeOrder(req: any, res: any) {
   // Ensure that chosen tickets don't already exist
   for (let ticket of req.body.cart) {
     const existingTicket = await Ticket.findOne({
@@ -37,7 +37,7 @@ export async function placeOrder(req, res) {
   }
 
   // Create order
-  const order = await Order.create({ date: Date.now().toString(), UserId: req.body.user })
+  const order: any = await Order.create({ date: Date.now().toString(), UserId: req.body.user })
   // Create tickets and associate them with order
   for (let ticket of req.body.cart) {
     await buyTicket(order.id, ticket.showing, ticket.seat)
@@ -49,13 +49,13 @@ export async function placeOrder(req, res) {
 
 
 // Given an order, showing, and seat create the Ticket and TicketHistory items for that order
-async function buyTicket(OrderId, showingId, seat) {
+async function buyTicket(OrderId: any, showingId: any, seat: any) {
   // Create ticket
   Ticket.create({ showingId, seat })
 
   // Save copy of ticket in TicketHistory
-  const info = await getFullMovieInfo(showingId)
-  const archivedTicket = await TicketHistory.create({
+  const info: any = await getFullMovieInfo(showingId)
+  const archivedTicket: any = await TicketHistory.create({
     name: info.movie.title,
     poster: info.movie.poster,
     time: info.showing.time,
@@ -68,8 +68,8 @@ async function buyTicket(OrderId, showingId, seat) {
 
 
 // Gets full showing and movie info given a showing ID
-async function getFullMovieInfo(showingId) {
-  const showing = await Showing.findOne({
+async function getFullMovieInfo(showingId: any) {
+  const showing: any = await Showing.findOne({
     where: {
       id: showingId
     }

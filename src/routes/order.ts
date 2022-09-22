@@ -1,5 +1,5 @@
 import express from 'express'
-import { placeOrder } from '../controllers/orderController.js'
+import { placeOrder } from '../controllers/orderController'
 const router = express.Router()
 
 // Given a showing ID, find any purchased tickets

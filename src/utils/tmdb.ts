@@ -24,7 +24,7 @@ export async function getShowings() {
   ].join('&')
 
   const response = await fetch('https://api.themoviedb.org/3/discover/movie?' + options)
-  const data = await response.json()
+  const data: any = await response.json()
 
   const limit = 7
   const limitedResults = data.results.slice(0, limit)
@@ -55,7 +55,7 @@ export async function getFavorites() {
   ].join('&')
 
   const response = await fetch('https://api.themoviedb.org/3/movie/popular?' + options)
-  const data = await response.json()
+  const data: any = await response.json()
 
   for (let video of data.results) {
     video.trailer = await getTrailer(video.id)
@@ -67,12 +67,12 @@ export async function getFavorites() {
 }
 
 
-export async function getTrailer(id) {
+export async function getTrailer(id: any) {
   const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?&api_key=${process.env.TMDB_API_KEY}`)
-  const data = await response.json()
+  const data: any = await response.json()
 
   // Reverse array so first trailer is used
-  const trailers = data.results.filter(video => video.type = 'Trailer').reverse()
+  const trailers = data.results.filter((video: any) => video.type = 'Trailer').reverse()
 
   if (trailers[0]) {
     return trailers[0].key

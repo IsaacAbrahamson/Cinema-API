@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
-import TicketHistory from './TicketHistory.js'
-import User from './User.js'
-import db from '../utils/connectDB.js'
+import TicketHistory from './TicketHistory'
+import User from './User'
+import db from '../utils/connectDB'
 
 const Order = db.define('Order', {
   date: {

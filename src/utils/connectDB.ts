@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+const db = new Sequelize(process.env.DB_NAME || 'cinema', process.env.DB_USER || 'root', process.env.DB_PASS, {
   host: process.env.DB_HOST,
   dialect: 'mysql',
   logging: false,

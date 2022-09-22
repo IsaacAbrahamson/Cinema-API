@@ -2,12 +2,12 @@
 import { regRooms } from '../config/theaters.js'
 
 // Creates times for favorite and showing movies for x number of days
-export function createTimes(favorites, showings, days) {
+export function createTimes(favorites: any, showings: any, days: any) {
   let output = []
 
   for (let day = 0; day < days; day++) {
     // Store all available movie times
-    let times = []
+    let times: any = []
 
     // Create times until all rooms are full
     while (times.length < countAvailable(regRooms)) {
@@ -22,7 +22,7 @@ export function createTimes(favorites, showings, days) {
 
 
 // calculate all of the times available for a list of rooms
-function countAvailable(rooms) {
+function countAvailable(rooms: any) {
   let count = 0
   for (let room of rooms) {
     for (let time of room.times) {
@@ -35,7 +35,7 @@ function countAvailable(rooms) {
 
 // take list of movies, available rooms, list of already chosen rooms, and the current day
 // and create room times
-function createRooms(movies, rooms, day) {
+function createRooms(movies: any, rooms: any, day: any) {
   let reservedTimes = []
 
   // loop through rooms and movies
@@ -52,9 +52,9 @@ function createRooms(movies, rooms, day) {
 
 
 
-function getDate(day) {
-  let date = new Date(new Date().setDate(new Date().getDate() + day))
+function getDate(day: number): string {
+  const date: Date = new Date(new Date().setDate(new Date().getDate() + day))
   date.setMinutes(date.getMinutes() - date.getTimezoneOffset())
-  date = date.toISOString().slice(0, 10)
-  return date
+  const dateStr: string = date.toISOString().slice(0, 10)
+  return dateStr
 }

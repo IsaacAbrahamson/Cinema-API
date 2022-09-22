@@ -3,7 +3,7 @@ import db from './connectDB.js'
 
 // Helper utilities to call TMDB api and determine available rooms and showtimes
 import { getShowings, getFavorites } from './tmdb.js'
-import { createTimes } from '../utils/showingsAlgorithm.js'
+import { createTimes } from './showingsAlgorithm.js'
 
 // Get database models
 import Showing from '../models/Showing.js'
@@ -23,21 +23,21 @@ try {
   // Drop/Create tables
   if (dropAll) {
     console.log('Re-creating all tables...')
-    await db.sync({ force: true, lock: true, transaction })
+    await db.sync({ force: true })
   } else {
     console.log('Dropping Movies, Showings, and Tickets tables...')
-    await Ticket.drop({ lock: true, transaction })
-    await Showing.drop({ lock: true, transaction })
-    await Movie.drop({ lock: true, transaction })
+    await Ticket.drop()
+    await Showing.drop()
+    await Movie.drop()
     console.log('Syncing tables...')
-    await Movie.sync({ lock: true, transaction })
-    await Showing.sync({ lock: true, transaction })
-    await Ticket.sync({ lock: true, transaction })
-    await User.sync({ lock: true, transaction })
-    await Order.sync({ lock: true, transaction })
-    await TicketHistory.sync({ lock: true, transaction })
+    await Movie.sync()
+    await Showing.sync()
+    await Ticket.sync()
+    await User.sync()
+    await Order.sync()
+    await TicketHistory.sync()
     console.log('Syncing all table schema...')
-    await db.sync({ lock: true, transaction })
+    await db.sync()
   }
 
   // Create test user
@@ -83,8 +83,8 @@ try {
 
 
 // Create the database movies table from an array of movie api information
-function createMovies(results, favorite, transaction) {
-  return Promise.all(results.map(result => {
+function createMovies(results: any, favorite: any, transaction: any) {
+  return Promise.all(results.map((result: any) => {
     return new Promise(async (resolve, reject) => {
 
       try {
@@ -109,8 +109,8 @@ function createMovies(results, favorite, transaction) {
 
 
 // Create showings based on a list of available room times
-function createShowings(times) {
-  return Promise.all(times.map(result => {
+function createShowings(times: any) {
+  return Promise.all(times.map((result: any) => {
     return new Promise(async (resolve, reject) => {
 
       try {
@@ -132,7 +132,7 @@ function createShowings(times) {
 
 // Add all of the showings to their related movie
 async function createAssociations() {
-  const movies = await Movie.findAll()
+  const movies: any = await Movie.findAll()
 
   for (let movie of movies) {
     const showings = await Showing.findAll({

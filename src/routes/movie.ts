@@ -1,5 +1,5 @@
 import express from 'express'
-import { findAll, findFavorites, findShowings, searchMovie, searchShowing } from '../controllers/movieController.js'
+import { findAll, findFavorites, findShowings, searchMovie, searchShowing } from '../controllers/movieController'
 const router = express.Router()
 
 router.get('/all', findAll)
