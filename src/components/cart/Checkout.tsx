@@ -13,7 +13,7 @@ function Checkout(props: Props) {
     // get needed data from cart
     const reqBody = {
       user: 1,
-      cart: props.cart.map(e => ({ showing: e.ticket.showingId, seat: e.ticket.seat }))
+      cart: props.cart.map(e => ({ showingId: e.ticket.showingId, seat: e.ticket.seat }))
     }
 
     // Place order
