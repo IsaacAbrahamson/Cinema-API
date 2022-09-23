@@ -12,6 +12,7 @@ import Order from '../models/Order.js'
 import User from '../models/User.js'
 // Get types
 import Transaction from 'sequelize/types/transaction.js'
+import { ApiResult, ShowingTime } from '../types'
 
 const transaction: Transaction = await db.transaction()
 const startTime: Date = new Date()
@@ -51,8 +52,8 @@ try {
 
   // Call TMDB api
   console.log('Getting latest movie data from TMDB API...')
-  const showings = await getShowings()
-  const favorites = await getFavorites()
+  const showings: ApiResult[] = await getShowings()
+  const favorites: ApiResult[] = await getFavorites()
 
   // Create data in Movies and Showings tables
   console.log('Creating Movies table')
@@ -60,7 +61,7 @@ try {
   await createMovies(showings, false, transaction)
 
   // times is array of 7 days worth of times
-  const weekTimes = createTimes(showings, 7)
+  const weekTimes: ShowingTime[][] = createTimes(showings, 7)
   // for every day create showings for that days times
   console.log('Creating Showings table')
   await Promise.all(weekTimes.map(day => createShowings(day)))
@@ -86,9 +87,9 @@ try {
 
 
 // Create the database movies table from an array of movie api information
-function createMovies(results: any, favorite: any, transaction: any) {
-  return Promise.all(results.map((result: any) => {
-    return new Promise(async (resolve, reject) => {
+function createMovies(results: ApiResult[], favorite: boolean, transaction: Transaction): Promise<Movie[]> {
+  return Promise.all<Promise<Movie>>(results.map((result: ApiResult) => {
+    return new Promise<Movie>(async (resolve, reject) => {
 
       try {
         const movie = await Movie.create({
@@ -112,9 +113,9 @@ function createMovies(results: any, favorite: any, transaction: any) {
 
 
 // Create showings based on a list of available room times
-function createShowings(times: any) {
-  return Promise.all(times.map((result: any) => {
-    return new Promise(async (resolve, reject) => {
+function createShowings(times: ShowingTime[]): Promise<Showing[]> {
+  return Promise.all<Promise<Showing>>(times.map((result: ShowingTime) => {
+    return new Promise<Showing>(async (resolve, reject) => {
 
       try {
         const showing = await Showing.create({
@@ -134,11 +135,11 @@ function createShowings(times: any) {
 
 
 // Add all of the showings to their related movie
-async function createAssociations() {
-  const movies: any = await Movie.findAll()
+async function createAssociations(): Promise<void> {
+  const movies: Movie[] = await Movie.findAll()
 
   for (let movie of movies) {
-    const showings = await Showing.findAll({
+    const showings: Showing[] = await Showing.findAll({
       where: {
         apiID: movie.apiID
       }

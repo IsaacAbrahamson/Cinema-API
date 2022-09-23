@@ -1,89 +1,90 @@
+import { Request, Response } from 'express'
 import Movie from '../models/Movie.js'
 import Showing from '../models/Showing.js'
 
 // Finds movie information based on movie id
 // Example: /api/searchMovie?id=1
-export async function searchMovie(req: any, res: any) {
+export async function searchMovie(req: Request, res: Response): Promise<Response> {
+  const id: number = Number(req.query.id)
+
   try {
-    const movies = await Movie.findAll({
-      where: {
-        id: req.query.id
-      },
+    const movies: Movie[] = await Movie.findAll({
+      where: { id },
       include: Showing
     })
-    res.json(movies)
+    return res.json(movies)
   } catch (err) {
-    console.log(err)
-    res.json({ err: 'An error occured.' })
+    console.warn(err)
+    return res.json({ err: 'An error occured.' })
   }
 }
 
 // Finds movie information based on showing id
 // Example: /api/searchShowing?id=1
-export async function searchShowing(req: any, res: any) {
+export async function searchShowing(req: Request, res: Response): Promise<Response> {
+  const id: number = Number(req.query.id)
+
   try {
-    const showings = await Showing.findAll({
-      where: {
-        id: req.query.id
-      },
+    const showings: Showing[] = await Showing.findAll({
+      where: { id },
       include: Movie
     })
-    res.json(showings)
+    return res.json(showings)
   } catch (err) {
-    console.log(err)
-    res.json({ err: 'An error occured.' })
+    console.warn(err)
+    return res.json({ err: 'An error occured.' })
   }
 }
 
 // Example: /api/movie/all
-export async function findAll(req: any, res: any) {
+export async function findAll(req: Request, res: Response): Promise<Response> {
   try {
-    const movies = await Movie.findAll({ include: Showing })
-    res.json(movies)
+    const movies: Movie[] = await Movie.findAll({ include: Showing })
+    return res.json(movies)
   } catch (err) {
-    console.log(err)
-    res.json({ err: 'An error occured.' })
+    console.warn(err)
+    return res.json({ err: 'An error occured.' })
   }
 }
 
 // Example: /api/movie/favorites?date=2022-09-06
-export async function findFavorites(req: any, res: any) {
+export async function findFavorites(req: Request, res: Response): Promise<Response> {
+  const date: string = req.query.date as string
+
   try {
-    const movies = await Movie.findAll({
+    const movies: Movie[] = await Movie.findAll({
       where: {
         favorite: true
       },
       include: {
         model: Showing,
-        where: {
-          date: req.query.date
-        }
+        where: { date }
       }
     })
-    res.json(movies)
+    return res.json(movies)
   } catch (err) {
-    console.log(err)
-    res.json({ err: 'An error occured.' })
+    console.warn(err)
+    return res.json({ err: 'An error occured.' })
   }
 }
 
 // Example: /api/movie/showings?date=2022-09-06
-export async function findShowings(req: any, res: any) {
+export async function findShowings(req: Request, res: Response): Promise<Response> {
+  const date: string = req.query.date as string
+
   try {
-    const movies = await Movie.findAll({
+    const movies: Movie[] = await Movie.findAll({
       where: {
         favorite: false
       },
       include: {
         model: Showing,
-        where: {
-          date: req.query.date
-        }
+        where: { date }
       }
     })
-    res.json(movies)
+    return res.json(movies)
   } catch (err) {
     console.log(err)
-    res.json({ err: 'An error occured.' })
+    return res.json({ err: 'An error occured.' })
   }
 }

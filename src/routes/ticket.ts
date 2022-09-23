@@ -1,10 +1,10 @@
-import express from 'express'
+import express, { Router, Request, Response } from 'express'
 import Ticket from '../models/Ticket.js'
-const router = express.Router()
+const router: Router = express.Router()
 
 // Given a showing ID, find any purchased tickets
 // Route: /api/ticket/find?showingId=1
-router.get('/find', async (req, res) => {
+router.get('/find', async (req: Request, res: Response) => {
   try {
     const tickets = await Ticket.findAll({
       where: {

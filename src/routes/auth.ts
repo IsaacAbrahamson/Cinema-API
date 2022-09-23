@@ -1,7 +1,7 @@
-import express, { application } from 'express'
-const router = express.Router()
+import express, { Router, Request, Response } from 'express'
+const router: Router = express.Router()
 
-router.get('/register', (req, res) => {
+router.get('/register', (req: Request, res: Response) => {
   res.send('register')
 })
 

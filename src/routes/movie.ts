@@ -1,6 +1,6 @@
-import express from 'express'
+import express, { Router } from 'express'
 import { findAll, findFavorites, findShowings, searchMovie, searchShowing } from '../controllers/movieController.js'
-const router = express.Router()
+const router: Router = express.Router()
 
 router.get('/all', findAll)
 router.get('/favorites', findFavorites)

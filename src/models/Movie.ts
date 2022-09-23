@@ -16,8 +16,8 @@ class Movie extends Model<InferAttributes<Movie>, InferCreationAttributes<Movie>
   declare overview: string
   declare release: string
   declare trailer: string | null
-  declare backdrop: string
-  declare poster: string
+  declare backdrop: string | null
+  declare poster: string | null
 
   // Association methods
   declare getShowings: HasManyGetAssociationsMixin<Showing>

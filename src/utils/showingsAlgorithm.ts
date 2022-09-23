@@ -1,13 +1,19 @@
 // Algorithm used to schedule showing times given list of available theaters, times, and movies
 import { regRooms } from '../config/theaters.js'
+import { ApiResult, ShowingTime } from '../types'
+
+interface Room {
+  name: string
+  times: string[]
+}
 
 // Creates times for favorite and showing movies for x number of days
-export function createTimes(showings: any, days: any) {
-  let output = []
+export function createTimes(showings: ApiResult[], days: number): ShowingTime[][] {
+  let output: ShowingTime[][] = []
 
   for (let day = 0; day < days; day++) {
     // Store all available movie times
-    let times: any = []
+    let times: ShowingTime[] = []
 
     // Create times until all rooms are full
     while (times.length < countAvailable(regRooms)) {
@@ -22,8 +28,8 @@ export function createTimes(showings: any, days: any) {
 
 
 // calculate all of the times available for a list of rooms
-function countAvailable(rooms: any) {
-  let count = 0
+function countAvailable(rooms: Room[]): number {
+  let count: number = 0
   for (let room of rooms) {
     for (let time of room.times) {
       count++
@@ -35,14 +41,14 @@ function countAvailable(rooms: any) {
 
 // take list of movies, available rooms, list of already chosen rooms, and the current day
 // and create room times
-function createRooms(movies: any, rooms: any, day: any) {
-  let reservedTimes = []
+function createRooms(movies: ApiResult[], rooms: Room[], day: number): ShowingTime[] {
+  let reservedTimes: ShowingTime[] = []
 
   // loop through rooms and movies
   for (let i = 0; i < rooms.length; i++) {
     // loop through times for each room
     for (let timeSlot of rooms[i].times) {
-      const roomTime = `${getDate(day)} ${timeSlot}`
+      const roomTime: string = `${getDate(day)} ${timeSlot}`
       reservedTimes.push({ name: rooms[i].name, time: roomTime, apiID: movies[i].id, })
     }
   }

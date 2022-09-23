@@ -14,7 +14,7 @@ class Showing extends Model<InferAttributes<Showing>, InferCreationAttributes<Sh
   declare date: string
   declare time: string
   declare room: string
-  declare apiID: string
+  declare apiID: number
   declare movieId: ForeignKey<Movie['id']>
 
   // Association methods
