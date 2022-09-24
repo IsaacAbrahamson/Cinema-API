@@ -7,7 +7,7 @@ export interface ITicket {
   reserved: boolean
   active: boolean
   chosen: boolean
-  id: number
+  id?: number
 }
 
 export interface IShowing {
