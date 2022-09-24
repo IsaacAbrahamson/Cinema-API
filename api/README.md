@@ -2,7 +2,7 @@
 
 ## About
 
-This project using Node.js, Express.js, TypeScript, and MySQL. You will need to have at least Node.js version 16.14 and MySQL installed to run this project locally.
+This project uses Node.js, Express.js, TypeScript, and MySQL. You will need to have at least Node.js version 16.14 and MySQL installed to run this project locally.
 
 ## Database ERD
 
