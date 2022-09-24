@@ -4,6 +4,8 @@ Visit: https://cinema.iabrahamson.com/
 
 3's Cinema is a full-stack ecommerce application built using React, Express, TypeScript, and MySQL.
 
+![image](https://user-images.githubusercontent.com/17521691/192074253-29263ac2-b3a8-453e-ac4d-123a7d71fccc.png)
+
 ## Project Structure
 
 This project is split into two folders, `react` and `api` for the frontend and backend. Each folder contains more details for that part of the project, and includes instructions on how to get started installing the project locally.
@@ -30,4 +32,4 @@ If you would like to run the project yourself locally, simply:
 
 ## About the Author
 
-My name is Isaac, and I'm a professional frontend web developer. I've been building websites since 2015, and I built this application specifically because I wanted to create a full-stack polished React application using TypeScript. I've built quite a few other interesting projects, and I would love for you to visit [my portfolio website](https://iabrahamson.com) and get in touch.
+Hi! My name is Isaac, and I'm a professional frontend web developer. I created this project specifically to test my React and TypeScript skills. I've built quite a few other interesting projects, and I would love for you to visit [my portfolio website](https://iabrahamson.com) and get in touch.
