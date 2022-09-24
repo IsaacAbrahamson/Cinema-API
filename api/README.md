@@ -83,7 +83,51 @@ Start server
 ```
 npm run dev
 ```
-or build for production
+
+## Deploying to Production
+
+Compile the typescript. This will also copy `package.json` to the `/dist` folder.
 ```
 npm run build
+```
+Upload the `/dist` folder to the Linux server. Make sure to create a `.env` file with the correct MySQL information for the server.
+```
+cat .env
+```
+Install dependencies
+```
+npm install
+```
+Instead of running `npm run update` to update the database, run `npm run cronUpdate` as it is made for linux production.
+```
+sudo npm run cronUpdate dropall
+```
+Start the server
+```
+pm2 start app.js --name cinema-app
+```
+Test that server is running
+```
+curl http://localhost:3005/api/movie/all
+```
+
+## Automating Database Updates
+
+The database is designed to be updated daily with the latest movie information. The `./utils/updateDB.js` script will call the TMDB api and recreate the `Movies`, `Showings`, and `Tickets` tables. `Users`, `Orders`, and `TicketHistories` tables persist unless the `dropall` command line argument is added.
+
+Before creating a crontab, running the script directly will require you to have the `.env` file inside the `/utils` folder.
+```
+sudo cp ./.env ./utils/.env
+```
+Next, determine node.js location
+```
+which node
+```
+Open crontab
+```
+sudo crontab -e
+```
+Run the database update every morning at 4:55am
+```
+55 04 * * * /usr/bin/node /home/isaac/cinema/utils/updateDB.js
 ```
