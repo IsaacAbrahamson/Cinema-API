@@ -71,9 +71,13 @@ DB_USER="..."
 DB_PASS="..."
 PORT="..."
 ```
-Create database schema and fill it with data from TMDB api  
+To initially create database with data from TMDB api 
 ```
 npm run update dropall
+```
+Do not include the `dropall` option if you want to persist users and order history
+```
+npm run update
 ```
 Start server
 ```
