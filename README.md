@@ -1,4 +1,4 @@
-# 3's Cinema Ecommerce App
+# Cinema Ecommerce App
 
 Visit: https://cinema.iabrahamson.com/
 
