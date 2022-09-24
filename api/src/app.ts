@@ -1,10 +1,10 @@
 import express, { Application, Router } from 'express'
 
 // Import route middleware
-import movieRoutes from './routes/movie'
-import ticketRoutes from './routes/ticket'
-import authRoutes from './routes/auth'
-import orderRoutes from './routes/order'
+import movieRoutes from './routes/movie.js'
+import ticketRoutes from './routes/ticket.js'
+import authRoutes from './routes/auth.js'
+import orderRoutes from './routes/order.js'
 
 const app: Application = express()
 app.use(express.json())

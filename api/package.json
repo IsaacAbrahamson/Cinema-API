@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "start": "node dist/app.js",
-    "update": "tsc -p . && node dist/utils/updateDB.js",
+    "update": "tsc && node dist/utils/updateDB.js",
+    "cronUpdate": "node ./utils/updateDB.js",
     "dev": "nodemon src/app.ts",
-    "build": "tsc -p ."
+    "build": "tsc",
+    "postbuild": "copy .\\package.json .\\dist\\package.json"
   },
   "dependencies": {
     "dotenv": "^16.0.2",
