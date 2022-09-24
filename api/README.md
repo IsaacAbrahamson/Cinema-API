@@ -6,7 +6,7 @@ This project uses Node.js, Express.js, TypeScript, and MySQL. You will need to h
 
 ## Database ERD
 
-This project uses a MySQL database. It will be helpful to understand the basic schema by viewing the diagram below. Note that the `Movies`, `Showings`, and `Tickets` tables showin in gray are recreated 
+This project uses a MySQL database. It will be helpful to understand the basic schema by viewing the diagram below. Note that the `Movies`, `Showings`, and `Tickets` tables shown in gray are recreated every time the database update script is ran (usually daily)
 
 ![ERD](https://user-images.githubusercontent.com/17521691/192074719-1b368223-c8ed-4008-a82b-34e2e1395f1c.png)
 
