@@ -98,9 +98,9 @@ Install dependencies
 ```
 npm install
 ```
-Instead of running `npm run update` to update the database, run `npm run cronUpdate` as it is made for linux production.
+Instead of running `npm run update` to update the database, use following command for linux:
 ```
-sudo npm run cronUpdate dropall
+/usr/bin/node /home/isaac/cinema/utils/updateDB.js dropall
 ```
 Start the server
 ```
@@ -115,19 +115,11 @@ curl http://localhost:3005/api/movie/all
 
 The database is designed to be updated daily with the latest movie information. The `./utils/updateDB.js` script will call the TMDB api and recreate the `Movies`, `Showings`, and `Tickets` tables. `Users`, `Orders`, and `TicketHistories` tables persist unless the `dropall` command line argument is added.
 
-Before creating a crontab, running the script directly will require you to have the `.env` file inside the `/utils` folder.
-```
-sudo cp ./.env ./utils/.env
-```
-Next, determine node.js location
-```
-which node
-```
 Open crontab
 ```
 sudo crontab -e
 ```
-Run the database update every morning at 4:55am
+Run the database update every morning at 1:55am
 ```
-55 04 * * * /usr/bin/node /home/isaac/cinema/utils/updateDB.js
+55 1 * * * /usr/bin/node /home/isaac/cinema/utils/updateDB.js
 ```
