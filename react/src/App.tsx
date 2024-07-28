@@ -27,7 +27,7 @@ function App() {
   }, [cart])
 
   async function fetchMovies(): Promise<void> {
-    const res = await fetch(buildURL('http://localhost:8080/api/movie/all'))
+    const res = await fetch(buildURL('/api/movie/all'))
     const data = await res.json()
     setMovies(data)
   }

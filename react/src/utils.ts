@@ -4,7 +4,7 @@ export const buildURL = (url: string) => {
     // and I just want it to run again lol
     const DEV = true;
     if (DEV) {
-        return `127.0.0.1:8080${url}`
+        return `http://127.0.0.1:8080${url}`
     } else {
         return url;
     }
