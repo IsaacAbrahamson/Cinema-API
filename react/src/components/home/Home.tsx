@@ -15,7 +15,6 @@ function Home() {
   async function fetchMovies() {
     const res = await fetch(buildURL('/api/movie/all'))
     const data: IMovie[] = await res.json()
-    console.log(data)
     setMovies(data)
   }
 
