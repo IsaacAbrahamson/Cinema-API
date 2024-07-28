@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import ShowingItem from './ShowingItem'
 import ShowingSelector from './ShowingSelector'
 import { IMovie } from '../../types'
+import { buildURL } from '../../utils'
 
 function Showings() {
   let todayDate: Date = new Date()
@@ -15,7 +16,7 @@ function Showings() {
   }, [chosenDate])
 
   async function fetchShowings(): Promise<void> {
-    const res = await fetch(`/api/movie/showings?date=${chosenDate}`)
+    const res = await fetch(buildURL(`/api/movie/showings?date=${chosenDate}`))
     const data = await res.json()
     setShowings(data)
   }

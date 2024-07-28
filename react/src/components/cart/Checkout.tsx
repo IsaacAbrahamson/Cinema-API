@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import OrderSummary from './OrderSummary'
 import { ICart, ITicket } from '../../types'
+import { buildURL } from '../../utils'
 
 interface Props {
   cart: ICart[],
@@ -17,7 +18,7 @@ function Checkout(props: Props) {
     }
 
     // Place order
-    const res = await fetch('/api/order/new', {
+    const res = await fetch(buildURL('/api/order/new'), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

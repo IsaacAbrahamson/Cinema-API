@@ -6,6 +6,7 @@ import TicketCount from './TicketCount'
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ICart, ITicket, IShowing } from '../../types'
 import './ShowingStyles.css'
+import { buildURL } from '../../utils'
 
 interface Props {
   cart: ICart[],
@@ -50,7 +51,7 @@ function Showing(props: Props) {
   }, [])
   async function callAPI(): Promise<void> {
     // Get any tickets that exist for the showing
-    let ticketRes = await fetch(`/api/ticket/find?showingId=${showingId}`)
+    let ticketRes = await fetch(buildURL(`/api/ticket/find?showingId=${showingId}`))
     let ticketData: ITicket[] = await ticketRes.json()
 
     // Update any tickets that come in from api to be reserved in state
@@ -66,7 +67,7 @@ function Showing(props: Props) {
     })
 
     // Get related movie data for showing
-    let movieRes = await fetch(`/api/movie/searchShowing?id=${showingId}`)
+    let movieRes = await fetch(buildURL(`/api/movie/searchShowing?id=${showingId}`))
     let movieData = await movieRes.json()
     setShowing(movieData[0])
   }

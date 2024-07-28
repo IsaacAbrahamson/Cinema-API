@@ -3,6 +3,7 @@ import Header from './Header'
 import Showings from './Showings'
 import { IMovie } from '../../types'
 import './HomeStyles.css'
+import { buildURL } from '../../utils'
 
 function Home() {
   const [movies, setMovies] = useState<IMovie[]>([])
@@ -12,7 +13,7 @@ function Home() {
   }, [])
 
   async function fetchMovies() {
-    const res = await fetch('/api/movie/all')
+    const res = await fetch(buildURL('/api/movie/all'))
     const data: IMovie[] = await res.json()
     setMovies(data)
   }

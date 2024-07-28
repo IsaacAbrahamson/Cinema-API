@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Cart from './components/cart/Cart'
 import { ICart, ITicket, IShowing } from './types'
 import './App.css'
+import { buildURL } from './utils'
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -26,7 +27,7 @@ function App() {
   }, [cart])
 
   async function fetchMovies(): Promise<void> {
-    const res = await fetch('/api/movie/all')
+    const res = await fetch(buildURL('http://localhost:8080/api/movie/all'))
     const data = await res.json()
     setMovies(data)
   }
@@ -44,7 +45,7 @@ function App() {
       ticket.chosen = false
 
       // update cart with ticket and movie information
-      const res = await fetch(`/api/movie/searchShowing?id=${ticket.showingId}`)
+      const res = await fetch(buildURL(`/api/movie/searchShowing?id=${ticket.showingId}`))
       const [showing]: IShowing[] = await res.json()
       newCart.push({ ticket, showing })
     }
