@@ -69,7 +69,7 @@ function Showing(props: Props) {
     // Get related movie data for showing
     let movieRes = await fetch(buildURL(`/api/movie/searchShowing?id=${showingId}`))
     let movieData = await movieRes.json()
-    setShowing(movieData[0])
+    setShowing(movieData.at(0) ?? {})
   }
 
 
