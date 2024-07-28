@@ -2,9 +2,8 @@
 // https://developers.themoviedb.org/3
 
 import { ApiResult } from '../types'
-import * as dotenv from 'dotenv'
 import fetch, { Response } from 'node-fetch'
-dotenv.config()
+import 'dotenv/config'
 
 interface MoviesApiData {
   page: number,

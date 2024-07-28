@@ -102,6 +102,13 @@ Instead of running `npm run update` to update the database, use following comman
 ```
 /usr/bin/node /home/isaac/cinema/utils/updateDB.js dropall
 ```
+
+Set to use socket mode by uncommenting in `connectDB.ts`:
+
+```
+socketPath: '/var/run/mysqld/mysqld.sock'
+```
+
 Start the server
 ```
 pm2 start app.js --name cinema-app
