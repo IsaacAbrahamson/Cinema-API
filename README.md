@@ -1,6 +1,12 @@
 # Cinema Ecommerce App
 
-Visit: https://cinema.iabrahamson.com/
+### Case Study
+
+https://iabrahamson.com/pages/cinema.html
+
+### Live Demo
+
+https://cinema.iabrahamson.com/
 
 3's Cinema is a full-stack ecommerce application built using React, Express, TypeScript, and MySQL.
 
